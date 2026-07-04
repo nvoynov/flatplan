@@ -18,7 +18,6 @@ module Flatplan
         buffer << "% #{publication.title}"
         buffer << "% #{publication.author || 'Unknown Author'}"
         buffer << "% #{publication.date || Time.now.strftime('%Y-%m-%d')}\n"
-        buffer << "# #{publication.title}\n"
         
         # 2. Add short description if available
         buffer << "#{publication.description}\n" if publication.description
@@ -28,7 +27,7 @@ module Flatplan
           buffer << "---" if index > 0 # Inject pause separators between blocks
           
           if section.is_a?(Model::TextAndMediaSection)
-            buffer << "## Section Layout Block"
+            buffer << "# Section Layout Block"
             buffer << "text: #{section.text_alignment}"
             buffer << "media: #{section.media_alignment}\n"
             

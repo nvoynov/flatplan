@@ -53,7 +53,6 @@ describe Flatplan::Service::CreateInitialManifest do
     # Мы используем лямбду (Minitest::Mock::GenericExpectation) для валидации текста
     content_validator = ->(content) do
       content.include?("% Svalovichi") &&
-        content.include?("# Svalovichi") &&
         content.include?("text: left") &&
         content.include?("Some places call you back.") &&
         content.include?("![](DP2Q2553.webp)") &&

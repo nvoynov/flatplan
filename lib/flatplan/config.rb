@@ -14,7 +14,7 @@ module Flatplan
 
     def initialize
       @image_extensions = %w[.webp .jpg .jpeg .png .tif .tiff]
-      @manifest_name = 'ARTIST-MANIFESTO.md'
+      @manifest_name = 'SERIES-MANIFESTO.md'
     end
   end
 
