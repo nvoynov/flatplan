@@ -1,8 +1,1 @@
-.gitingore
-**/*~
-*.log
-.local_store
-.DS_Store
-
-sandbox.rb
-sandbox.md
+./sandbox.*

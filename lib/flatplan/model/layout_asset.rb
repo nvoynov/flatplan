@@ -1,10 +1,11 @@
-# lib/flatplan/model/layout_asset.rb
+require_relative 'base'
 
 module Flatplan
   module Model
+
     # Represents an atomic content asset—a photograph with its presentation
     # metadata within a layout structure.
-    class LayoutAsset
+    class LayoutAsset < Base
       # @return [String] the unique filename or relative path of the asset
       attr_accessor :filename
 

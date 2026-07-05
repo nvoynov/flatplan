@@ -33,6 +33,12 @@ module Flatplan
         raise NotImplementedError, "#{self.class} must implement #join_paths"
       end
 
+      # @param _path [String] source target path to read
+      # @return [String] plain text contents of the file
+      def read_text_file(_path)
+        raise NotImplementedError, "#{self.class} must implement #read_text_file"
+      end
+       
       # @param _path [String] destination target path
       # @param _content [String] plain text contents to persist
       # @return [void]

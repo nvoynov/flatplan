@@ -1,3 +1,4 @@
+require_relative 'flatplan/version'
 require_relative 'flatplan/model'
 require_relative 'flatplan/builder'
 require_relative 'flatplan/presenter'

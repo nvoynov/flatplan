@@ -1,10 +1,11 @@
-# lib/flatplan/model/series_publication.rb
+require_relative 'base'
 
 module Flatplan
   module Model
+
     # The Aggregate Root representing a complete photographic publication series.
     # It acts as the orchestrator for text segments and visual chapters.
-    class SeriesPublication
+    class SeriesPublication < Base
       # @return [String] the primary title of the photo series
       attr_accessor :title
 
@@ -26,12 +27,13 @@ module Flatplan
       # @param author [String, nil] series gallery owner
       # @param date [String, nil] capture timeline
       # @param description [String, nil] context metadata description
-      def initialize(title:, author: nil, date: nil, description: nil)
+      # @param sections: [Array<LayoutSection>, nil] context metadata description
+      def initialize(title:, author: nil, date: nil, description: nil, sections: nil)
         @title = title
         @author = author
         @date = date
         @description = description
-        @sections = []
+        @sections = sections || []
       end
 
       # Appends a newly created layout section to the publication pipeline.

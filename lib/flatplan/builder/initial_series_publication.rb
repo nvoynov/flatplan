@@ -1,11 +1,11 @@
-require_relative "../callable"
+require_relative 'base'
 
 module Flatplan
   module Builder
+    
     # Builds a starting, default SeriesPublication from raw folders and files.
     # Aggregates discovered photos into a single initial text-and-media section.
-    class InitialSeriesPublication
-      extend Callable
+    class InitialSeriesPublication < Base
 
       # Compiles raw metadata and files into a validated domain entity.
       #

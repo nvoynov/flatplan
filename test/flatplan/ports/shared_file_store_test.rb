@@ -63,4 +63,14 @@ module SharedFileStoreTest
     # Contract demands it accepts path and content without crashing
     @store.write_text_file(target_path, "# Test Content")
   end
+  
+  # Verifies that #read_text_file responds correctly to invocation.
+  def test_contract_read_text_file
+    assert_respond_to @store, :read_text_file
+    target_path = @store.join_paths(@valid_dir_path, "TEST_MANIFEST.md")
+    
+    # Contract demands it returns a string when file exists
+    @store.write_text_file(target_path, "# Existing Content")
+    assert_equal "# Existing Content", @store.read_text_file(target_path)
+  end
 end
