@@ -24,6 +24,16 @@ module SharedFileStoreTest
     assert_equal false, @store.directory_exists?("non/existent/dir/path")
   end
 
+  # Verifies that #file_exist? correctly identifies file presence.
+  def test_contract_file_exist
+    assert_respond_to @store, :file_exist?
+    target_path = @store.join_paths(@valid_dir_path, "EXISTING_FILE.md")
+    
+    @store.write_text_file(target_path, "content")
+    assert_equal true, @store.file_exist?(target_path)
+    assert_equal false, @store.file_exist?("non/existent/file.md")
+  end
+
   # Verifies that #basename correctly extracts the trailing path component.
   def test_contract_basename
     assert_respond_to @store, :basename

@@ -9,8 +9,9 @@
 
 - designed `Model::Base` as ValueObject that mimik `Data#with`
 - designed `Dummy` data fixtures module
-- started `Presenter::PandocManifestSerializer`
-- started 'bin/preview_pipeline'
+- designed `Presenter::ConsoleFlatplan`
+- designed `Presenter::PandocManifestSerializer`
+- designed 'bin/flatplan' and `lib/flatplan/cli`
 
 ## 2026-07-04
 

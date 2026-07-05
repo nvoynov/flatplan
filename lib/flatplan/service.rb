@@ -1,5 +1,6 @@
 require_relative 'service/base'
 require_relative 'service/create_initial_manifest'
+require_relative 'service/load_publication'
 
 
 module Flatplan
@@ -10,4 +11,5 @@ module Flatplan
 
   # Global upper-level aliases for rapid script orchestration (Developer Experience)
   CreateInitialManifest = Service::CreateInitialManifest
+  LoadPublication = Service::LoadPublication
 end
