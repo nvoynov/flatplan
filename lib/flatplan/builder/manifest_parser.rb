@@ -96,7 +96,12 @@ module Flatplan
           elsif line.start_with?("![") && line.include?("](")
             match = line.match(/!\[(.*?)\]\((.*?)\)/)
             if match
-              assets << Model::LayoutAsset.new(filename: match[2], caption: match[1])
+              # match[1] — это подпись из квадратных скобок (String)
+              # match[2] — это имя файла из круглых скобок (String)
+              assets << Model::LayoutAsset.new(
+                filename: match[2].to_s,
+                caption: match[1].to_s
+              )
             end
           else
             paragraphs << line

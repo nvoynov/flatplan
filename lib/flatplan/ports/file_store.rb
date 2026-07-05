@@ -9,6 +9,12 @@ module Flatplan
         raise NotImplementedError, "#{self.class} must implement #directory_exists?"
       end
 
+      # @param _path [String] destination file path
+      # @return [Boolean] true if file exists
+      def file_exist?(_path)
+        raise NotImplementedError, "#{self.class} must implement #file_exists?"
+      end
+       
       # @param _path [String] file path to evaluate
       # @return [String] the last element of the path
       def basename(_path)

@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require './lib/flatplan'
+include Flatplan
+
+container = Struct.new(:file_store)
+  .new(file_store: FileSystemStoreAdapter)
+Ports::Context.setup(container)
+
+CLI.call 

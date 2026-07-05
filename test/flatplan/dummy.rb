@@ -24,7 +24,9 @@ module Dummy
   def asset_titles
     @asset_titles ||= begin
       words = String.new(LOREM_IPSUM).split
-      asset_filenames.size.times do
+      
+      # Use map to explicitly collect and return the generated string titles array
+      (1..asset_filenames.size).map do
         length = [3, 4, 5].sample
         words.sample(length).join(' ').capitalize
       end
@@ -101,4 +103,4 @@ module Dummy
   end
 end
 
-# pp Dummy.series_publication_hero
+pp Dummy.media_assets

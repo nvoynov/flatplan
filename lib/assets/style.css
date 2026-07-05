@@ -1,0 +1,85 @@
+/* style.css — Полный издательский CSS Grid каркас для Flatplan */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #222;
+  background-color: #fafafa;
+  line-height: 1.6;
+  margin: 0;
+  padding: 4rem 2rem;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  margin-bottom: 6rem;
+}
+
+/* Базовый контейнер для элементов истории */
+.section-text-media, .visual-pause, .editorial-hero {
+  max-width: 1200px;
+  margin: 0 auto 8rem auto;
+}
+
+/* 1. Текст слева: колонка текста (1fr) и широкая колонка для сетки фото (2fr) */
+.layout-left-text {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* 2. Текст справа: инвертированная сетка */
+.layout-right-text {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Внутренние стили для колонки с абзацами */
+.story-text p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Автоматическая сетка для фотографий внутри текстового или пауза-блока */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Тег параграфа, в который Pandoc по умолчанию заворачивает картинку */
+.media-grid p, .visual-pause p {
+  display: contents; /* Позволяет картинкам игнорировать <p> и вставать ровно в Grid */
+}
+
+/* Стилизация самих фотографий */
+.media-grid img, .editorial-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+/* 3. Блок чистой визуальной паузы */
+.visual-pause.spacing-large {
+  margin-top: 14rem;
+  margin-bottom: 14rem;
+}
+
+/* 4. Блок монументального акцента Hero */
+.editorial-hero img {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Адаптивность для мобильных телефонов */
+@media (max-width: 768px) {
+  .layout-left-text, .layout-right-text {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+

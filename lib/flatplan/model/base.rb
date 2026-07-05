@@ -26,20 +26,33 @@ module Flatplan
       end
       
       # @return [TrueClass, FalseClass] structure equality verification rule
+      # def ==(other)
+      #   self.class == other.class && 
+      #     constructor_keys.all? { send(it) == other.send(it) }  
+      # end
+
+      # Evaluates deep value-based equality between two model objects.
+      # Automatically processes nested structures, arrays, and sub-entities.
+      #
+      # @param other [Object] the objective entity to compare against
+      # @return [Boolean] true if classes match and all attribute values are equal
       def ==(other)
-        self.class == other.class && 
-          # constructor_keys.all? { send(it) == other.send(it) }  
-          constructor_keys.all? {|key|
-            value = send(key)
-            other_value = other.send(key)
-            
-            case value
-            when Array
-              value.all?{|v| other_value.member?(v)}
-            else
-              value == other_value
-            end
-          }  
+        return false unless other.is_a?(self.class)
+
+        # Get all instance variables defined in the current object scope
+        self_vars = instance_variables
+        other_vars = other.instance_variables
+
+        # Fail-Fast: if the set of internal attributes differs, they are not equal
+        return false unless self_vars.sort == other_vars.sort
+
+        # Deeply check each attribute value one by one
+        self_vars.all? do |var|
+          self_val = instance_variable_get(var)
+          other_val = other.instance_variable_get(var)
+
+          deep_equal?(self_val, other_val)
+        end
       end
       alias eql? ==
 
@@ -70,6 +83,22 @@ module Flatplan
 
       def constructor_keys
         self.class.constructor_keys
+      end
+
+      private
+      
+      # Recursively compares values, handling deep structures like arrays.
+      def deep_equal?(val1, val2)
+        if val1.is_a?(Array) && val2.is_a?(Array)
+          return false unless val1.size == val2.size
+
+          # Zip elements together and evaluate each pair recursively
+          val1.zip(val2).all? { |v1, v2| deep_equal?(v1, v2) }
+        else
+          # Fallback to standard object equality (which invokes our overridden ==
+          # if the objects inherit from Model::Base)
+          val1 == val2
+        end
       end
     end
   end

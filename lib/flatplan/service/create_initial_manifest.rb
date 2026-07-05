@@ -16,6 +16,10 @@ module Flatplan
           raise ArgumentError, "Target directory does not exist: #{directory_path}"
         end
 
+        # 0. Return manifest when it exists already
+        manifest_path = file_store.join_paths(directory_path, config.manifest_name)
+        return manifest_path if file_store.file_exist?(manifest_path)
+        
         folder_name = file_store.basename(directory_path)
         title = folder_name.gsub(/[-_]/, " ").capitalize
         all_files = file_store.list_entries(directory_path)

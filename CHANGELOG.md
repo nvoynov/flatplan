@@ -5,6 +5,13 @@
 - [ ] design publication parser of ARTIST-MANIFESTO.md
 - [ ] design publication HTML presenter for Exposure (Phlex?)
 
+## 2026-07-05
+
+- designed `Model::Base` as ValueObject that mimik `Data#with`
+- designed `Dummy` data fixtures module
+- started `Presenter::PandocManifestSerializer`
+- started 'bin/preview_pipeline'
+
 ## 2026-07-04
 
 The project devleops the idea of artistic photo series presentaion (for `Exposure`).
@@ -13,3 +20,4 @@ The first goal is to explores a new chapter-based layout where a few chapters ca
 
 The second goal is to enrich images by providing part of Exif and Prints information; add some specific tags to HTML for print collectors, galleries, and media requests. Maybe it's not the subject of Flatplan, but will be placed here and provided inside Series HTML generator.
 
+- designed basic architecture of models, builders, presenters, ports, and services
