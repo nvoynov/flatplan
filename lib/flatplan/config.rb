@@ -10,11 +10,11 @@ module Flatplan
     attr_reader :image_extensions
 
     # @return [String] the target naming convention for manifest files
-    attr_reader :manifest_name
+    attr_reader :series_manifest_name
 
     def initialize
       @image_extensions = %w[.webp .jpg .jpeg .png .tif .tiff]
-      @manifest_name = 'SERIES-MANIFESTO.md'
+      @series_manifest_name = 'SERIES.md'
     end
   end
 
@@ -24,7 +24,7 @@ module Flatplan
     extend Forwardable
 
     # Delegate setup readers directly to the immutable ConfigData instance
-    def_delegators :@data, :image_extensions, :manifest_name
+    def_delegators :@data, :image_extensions, :series_manifest_name
 
     def initialize
       @data = ConfigData.new

@@ -16,7 +16,7 @@ module Flatplan
           raise ArgumentError, "Target directory does not exist: #{directory_path}"
         end
 
-        manifest_path = file_store.join_paths(directory_path, config.manifest_name)
+        manifest_path = file_store.join_paths(directory_path, config.series_manifest_name)
         manifest_content = file_store.read_text_file(manifest_path)
         
         # Execute the domain compilation via the updated parser builder

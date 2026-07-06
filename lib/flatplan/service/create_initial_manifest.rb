@@ -17,7 +17,7 @@ module Flatplan
         end
 
         # 0. Return manifest when it exists already
-        manifest_path = file_store.join_paths(directory_path, config.manifest_name)
+        manifest_path = file_store.join_paths(directory_path, config.series_manifest_name)
         return manifest_path if file_store.file_exist?(manifest_path)
         
         folder_name = file_store.basename(directory_path)
@@ -40,7 +40,7 @@ module Flatplan
         manifest_content = SerializeManifest.call(publication)
 
         # 3. Persistence Step
-        manifest_path = file_store.join_paths(directory_path, config.manifest_name)
+        manifest_path = file_store.join_paths(directory_path, config.series_manifest_name)
         file_store.write_text_file(manifest_path, manifest_content)
 
         manifest_path

@@ -2,6 +2,20 @@
 
 ## TODO
 
+- [ ] Check if ExifTool inside the system
+
+- [ ] flatplan polishing session
+  - [ ] write Stonetomb artistic narrative
+  - [ ] create Stonetomb artistic manifest
+  - [ ] check PandocManifest serialization and browser preview
+  - [ ] optimize Stonetomb series for SEO
+  - [ ] what SEO suitable metadata should be added to the artistic
+        narrative, that have no concern to the series publication
+        itself but helpful for other possible usage of the series?
+        maybe, the publication itself and its assets should provide
+        the ability to store some metadata 
+  - [ ] discuss not handling but presering metadata changes; other
+        helpful staff like publication assets (across all sections) 
 - [ ] provide uniq `flatplan` prefix for all style entries such as divs, classes, etc.
   - [ ] change Pandoc Manifest generation for using new html things
   - [ ] accordingly change `style.css`

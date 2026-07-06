@@ -59,7 +59,7 @@ module Flatplan
         FileUtils.cp(css_path, tmp_dir)
   
         Dir.glob(File.join(series_dir, "*")).each do |item|
-          next if File.basename(item) == config.manifest_name
+          next if File.basename(item) == config.series_manifest_name
           FileUtils.ln_s(item, tmp_dir, force: true)
         end
 
