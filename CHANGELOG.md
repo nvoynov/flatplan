@@ -2,8 +2,29 @@
 
 ## TODO
 
-- [ ] design publication parser of ARTIST-MANIFESTO.md
-- [ ] design publication HTML presenter for Exposure (Phlex?)
+- [ ] provide uniq `flatplan` prefix for all style entries such as divs, classes, etc.
+  - [ ] change Pandoc Manifest generation for using new html things
+  - [ ] accordingly change `style.css`
+- [ ] design PrintBook for managing prints data (DSL manner) to provide prints information on web-site
+  - [ ] design data model (will drive DSL development and evolution)
+  - [ ] design the component interface for querying prints availability for particular image (:DP2Q1058, :P01013456) 
+  - [ ] design DSL for the book management; also serves and event log
+        where all data aggregates computed playing log events
+  - [ ] design mixing information from other stores, like image metadata, maybe series publicaction to get the editor curated titles, descriptions, tags, location, etc.      
+  - [ ] desing CLI query data interface based on image key
+- [ ] design PhotoBook (maybe PhotoStore, ImageMetadataRegistry, play with names and choose a short and concise one) to provide image metadata like original image size, timestamp of the shutter click, etc.
+  - [ ] design data model
+  - [ ] it gets initial metadata by using ExifTool
+  - [ ] it mixes information from series publications (flatplan) like loation, title, poetic description
+  - [ ] desing CLI query data interface based on image key
+- [ ] prepare the `Exposure` Jekyll site for `Zenweb` transition 
+  - [ ] ImageMagic adapter as an individual CLI tool component (ImageMaster, ImageManager, ImageArtist, ImageTransformer, Fusion...); adopt the tool for Rake interface
+  - [ ] how to port JS, such as `sw.js`, `Todd Hido mosaic`, and `mobile image-rotator`?
+  - [ ] how to port CSS for presenting series colage of 5 images?
+  - [ ] how to port Lightbox?
+  - [ ] redesing `/about` page for mentioning print clearence and some helpful metadata inside html page source?
+  - [ ] desing `/print-clearence` page based on PrintBook
+  - [ ] design `/prints` page based on PrintBook 
 
 ## 2026-07-05
 
