@@ -17,35 +17,38 @@ module PhotoStore
 
     # Extracts metadata and compiles it into a temporary hash structure.
     #
-    # @param file_path [String] path to the physical image master file
-    # @return [Hash] extracted metadata registry with extended attributes
-    def call(file_path)
-      # Request extended parameters from ExifTool binary execution pipeline
-      raw_json = execute_command(
-        "exiftool", "-j", 
-        "-ImageWidth", "-ImageHeight", "-DateTimeOriginal",
-        "-ObjectName", "-Caption-Abstract", "-Model", "-LensModel",
-        file_path
-      )
-      
-      parsed = JSON.parse(raw_json).first
-      unless parsed
-        raise "ExifTool failed to parse file at #{file_path}"
+    # @return [Hash] extracted metadata registry
+    def call
+      config = Config.instance
+
+      # 1. Build explicit extension filtering flags for ExifTool CLI (e.g. -ext tif -ext tiff)
+      ext_flags = config.supported_extensions.flat_map do |ext|
+        ["-ext", ext.sub(".", "")]
       end
 
-      filename = File.basename(file_path)
+      # 2. Invoke the external tool once for the whole directory tree natively
+      # We ask ExifTool to output JSON (-j) and do a recursive folder scan (-r)
+      raw_json = execute_command(
+        "exiftool", "-j", "-r",
+        "-ImageWidth", "-ImageHeight", "-DateTimeOriginal",
+        "-ObjectName", "-Caption-Abstract", "-Model", "-LensModel",
+        *ext_flags,
+        config.masters_dir
+      )
 
-      # Temporary return structure until the domain Model layer is refactored
-      {
-        filename: filename,
-        width: parsed["ImageWidth"]&.to_i,
-        height: parsed["ImageHeight"]&.to_i,
-        captured_at: parsed["DateTimeOriginal"],
-        title: parsed["ObjectName"] || parsed["Title"],
-        description: parsed["Caption-Abstract"] || parsed["Description"],
-        camera: parsed["Model"],
-        lens: parsed["LensModel"] || parsed["Lens"]
-      }
+      JSON.parse(raw_json).map do |parsed|
+        {
+          filename: parsed["SourceFile"],
+          width: parsed["ImageWidth"]&.to_i,
+          height: parsed["ImageHeight"]&.to_i,
+          captured_at: parsed["DateTimeOriginal"],
+          title: parsed["ObjectName"] || parsed["Title"],
+          description: parsed["Caption-Abstract"] || parsed["Description"],
+          camera: parsed["Model"],
+          lens: parsed["LensModel"] || parsed["Lens"]
+        }
+      end
+      
     end
   end
 end

@@ -1,4 +1,4 @@
-require_relative 'scanner'
+require_relative 'exif_tool_runner'
 
 module PhotoStore
 
@@ -18,21 +18,19 @@ module PhotoStore
       dir = File.dirname(@config.datastore)
       Dir.mkdir(dir) unless Dir.exist?(dir)
 
-      # call scanner when datastore does not exist
-      unless File.exist?(@config.datastore)
-        tempfile = Scanner.call
-        FileUtils.cp tempfile, @config.datastore 
-      end
-        
+      records = 
+        if File.exist?(@config.datastore)
+          JSON.load_file(@config.datastore, {symbolize_names: true})
+        else
+          ExifToolRunner.call
+            .tap{ File.write(@config.datastore, JSON.pretty_generate(it)) }
+        end
+      
       # TODO: try to mix absent data from other sources, 
-      #       like Flatplan Series that have image title
-      # load datastore and make the result
-      JSON
-        .load_file(@config.datastore, {symbolize_names: true})
+      records
         .map{ Image.new(**it) }
-        .map{ [ File.basename(it.filename, '.*').to_sym, it ]}
+        .map{ [ File.basename(it.filename, '.*').to_sym, it ] }
         .to_h
     end
-
   end
 end
