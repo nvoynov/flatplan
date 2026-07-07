@@ -23,7 +23,9 @@ module PhotoStore
           store
             .slice(*ARGV)
             .values
+            # .tap{ puts "bin/photostore values"; pp it}
             .map(&:to_h)
+            # .tap{ pp it }
         else
           store
             .get(ARGV.shift)

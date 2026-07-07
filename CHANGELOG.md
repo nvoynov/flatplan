@@ -33,6 +33,9 @@ __PhotoStore__
 - designed new PhotoStore component (see `lib/photostore` structure) and `bin/photostore` CLI that gives the access to the master metadata store
 - designed new guides/flatplan-user-guile.md
 - extracted stories from exposure (specs/FLATPLAN-USER-STORIES.md) 
+- designed adapter for `bin/photostore`
+- changed Model to provide metadata attributes
+- changed native serializer and builder for console preview
 
 ## 2026-07-06
 

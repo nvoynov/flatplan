@@ -3,8 +3,11 @@
 require './lib/flatplan'
 include Flatplan
 
-container = Struct.new(:file_store)
-  .new(file_store: FileSystemStoreAdapter.new)
+container = Struct.new(:file_store, :metadata_store)
+  .new(
+    file_store: FileSystemStoreAdapter.new,
+    metadata_store: PhotoStoreMetadataAdapter.new
+  )
 Ports::Context.setup(container)
 
 CLI.call 

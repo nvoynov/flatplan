@@ -24,16 +24,20 @@ module Flatplan
         title = folder_name.gsub(/[-_]/, " ").capitalize
         all_files = file_store.list_entries(directory_path)
         
+        # TODO: make regexp from image_extensions
         images = all_files.select do
           ext = file_store.extname(it).downcase
           config.image_extensions.include?(ext)
         end
 
+        # 0. Try to get images metadata
+        keys = images.map{ File.basename(it, '.*') }
+        metadata = metadata_store.fetch(*keys)
+        pp'keys', keys, 'metadata', metadata
+        
         # 1. Compilation Step (Builder shortcut call)
         publication = BuildInitialSeriesPublication.call(
-          title: title,
-          raw_text: raw_text,
-          filenames: images
+          title:, raw_text:, filenames: images, metadata:
         )
 
         # 2. Serialization Step (Presenter shortcut call)

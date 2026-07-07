@@ -1,8 +1,10 @@
-require_relative 'base'
+# lib/flatplan/builder/manifest_parser.rb
+
+require "yaml"
+require_relative "base"
 
 module Flatplan
   module Builder
-
     # Parses raw Flatplan Markdown manifest strings into validated
     # Model::SeriesPublication domain entity aggregates based on header tracking.
     class ManifestParser < Base
@@ -16,16 +18,24 @@ module Flatplan
           raise ArgumentError, "Manifest content cannot be empty"
         end
 
-        lines = content.split("\n").map(&:strip)
+        raw_lines = content.split("\n").map(&:strip)
+
+        # 1. Extract and Parse YAML Front Matter Block securely
+        front_matter, remaining_lines = extract_front_matter(raw_lines)
         
-        # 1. Parse metadata header safely from the very first line
-        title = parse_title(lines.first)
-        publication = Model::SeriesPublication.new(title: title)
+        publication = Model::SeriesPublication.new(
+          title: front_matter[:title] || "Untitled Publication",
+          author: front_matter[:author],
+          date: front_matter[:date],
+          location: front_matter[:location],
+          keywords: front_matter[:keywords] || [],
+          description: front_matter[:description]
+        )
 
-        # 2. Filter out all top metadata lines and clean empty lines
-        clean_lines = lines.reject { it.start_with?("%") || it.empty? }
+        # 2. Filter empty rows from the remaining body
+        clean_lines = remaining_lines.reject(&:empty?)
 
-        # 3. Slice content into separate topic blocks (headers, texts, and standalone pauses)
+        # 3. Slice content into separate topic blocks
         raw_topics = slice_into_topics(clean_lines)
 
         # 4. Process each discovered topic into domain sections
@@ -39,31 +49,53 @@ module Flatplan
 
       private
 
-      # Extracts publication title from the Pandoc metadata marker.
-      def parse_title(first_line)
-        if first_line&.start_with?("%")
-          first_line.sub("%", "").strip
-        else
-          "Untitled Publication"
+      # Safely isolates and parses the top YAML metadata configuration block.
+      def extract_front_matter(lines)
+        unless lines.first == "---"
+          return [{}, lines]
         end
+
+        yaml_lines = []
+        remaining_lines = []
+        inside_yaml = false
+        yaml_closed = false
+
+        lines.each_with_index do |line, index|
+          if line == "---" && !yaml_closed
+            if inside_yaml
+              inside_yaml = false
+              yaml_closed = true # Жестко запечатываем блок Front Matter
+              next
+            else
+              inside_yaml = true
+              next
+            end
+          end
+
+          if inside_yaml
+            yaml_lines << line
+          else
+            remaining_lines << line
+          end
+        end
+
+        parsed = YAML.safe_load(yaml_lines.join("\n"), permitted_classes: [Symbol]) || {}
+        symbolized = parsed.transform_keys(&:to_sym)
+
+        [symbolized, remaining_lines]
       end
 
-      # Slices plain lines array into pure blocks. Standalone '---' lines 
-      # are isolated into their own single-element batches.
+      # Slices plain lines array into blocks bounded by headers or standalone pauses.
       def slice_into_topics(lines)
         topics = []
         current_topic = []
 
         lines.each do |line|
           if line == "---"
-            # Cut current block early and flush it
             topics << current_topic unless current_topic.empty?
             current_topic = []
-            
-            # Isolate the pause separator into its own standalone batch
             topics << [line]
           elsif line.start_with?("#")
-            # Cut block early on a new header landmark
             topics << current_topic unless current_topic.empty?
             current_topic = [line]
           else
@@ -78,7 +110,6 @@ module Flatplan
       def build_section_from_topic(lines)
         return nil if lines.empty?
 
-        # 1. Fast-track check for the isolated standalone visual pause token
         if lines == ["---"]
           return BuildSection.call(:visual_pause, media_assets: [], spacing: :large)
         end
@@ -86,6 +117,7 @@ module Flatplan
         metadata = {}
         paragraphs = []
         assets = []
+        last_asset = nil
 
         lines.each do |line|
           if line.start_with?("#")
@@ -93,25 +125,27 @@ module Flatplan
           elsif line.match?(/^(text|media|spacing|layout):/)
             key, val = line.split(":", 2).map(&:strip)
             metadata[key.to_sym] = val.to_sym
+          elsif line.start_with?("title:") && last_asset
+            last_asset.title = line.split(":", 2).last.strip
+          elsif line.start_with?("captured_at:") && last_asset
+            last_asset.captured_at = line.split(":", 2).last.strip
           elsif line.start_with?("![") && line.include?("](")
             match = line.match(/!\[(.*?)\]\((.*?)\)/)
             if match
-              # match[1] — это подпись из квадратных скобок (String)
-              # match[2] — это имя файла из круглых скобок (String)
-              assets << Model::LayoutAsset.new(
+              # Extract string captures strictly using modern mapping indices
+              last_asset = Model::LayoutAsset.new(
                 filename: match[2].to_s,
                 caption: match[1].to_s
               )
+              assets << last_asset
             end
           else
             paragraphs << line
           end
         end
 
-        # Drop empty stray technical chunks
         return nil if paragraphs.empty? && assets.empty?
 
-        # 2. Strict layout routing based on explicit architectural intent
         if metadata[:layout] == :pause
           BuildSection.call(
             :visual_pause, 
@@ -121,14 +155,13 @@ module Flatplan
         elsif metadata[:layout] == :hero
           BuildSection.call(:editorial_hero, media_assets: assets)
         else
-          # Any standard block starting with '#' is natively a TextAndMedia spread
           BuildSection.call(
             :text_and_media,
             media_assets: assets,
             text_alignment: metadata[:text] || :left,
             media_alignment: metadata[:media] || :right,
             paragraphs: paragraphs,
-            spacing: metadata[:spacing] || :medium # Pass spacing safely as layout metadata
+            spacing: metadata[:spacing] || :medium
           )
         end
       end

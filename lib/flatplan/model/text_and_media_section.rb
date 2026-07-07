@@ -36,6 +36,7 @@ module Flatplan
         @text_alignment = text_alignment
         @media_alignment = media_alignment
         @paragraphs = paragraphs
+        @spacing = spacing
       end
     end
 

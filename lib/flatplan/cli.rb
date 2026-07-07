@@ -10,7 +10,7 @@ module Flatplan
   module CLI
     extend self
 
-    ASSETS_DIR = File.expand_path("assets", __dir__).freeze
+    ASSETS_DIR = File.expand_path("../assets", __dir__).freeze
     HELP_USAGE = "Usage:\n  flatplan <dir>          - Show text layout schematic flatplan\n  flatplan preview <dir>  - Open full interactive HTML browser preview".freeze
 
     def call
@@ -48,7 +48,7 @@ module Flatplan
     # Command 2: Trigger the external infrastructure Pandoc preview pipeline
     def preview(series_dir)
       validate_directory!(series_dir)
-      css_path = File.join(ASSETS_DIR, "style.css")
+      css_path = File.join(ASSETS_DIR, "style.css").tap{ pp it }
 
       CreateInitialManifest.call(directory_path: series_dir)
       publication = LoadPublication.call(directory_path: series_dir)

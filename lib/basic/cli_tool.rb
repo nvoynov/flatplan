@@ -1,10 +1,13 @@
 require "open3"
+require_relative 'callable'
 
 module Basic
 
   # Abstract infrastructure base class for securely orchestrating external
   # system command-line utilities (like ExifTool or ImageMagick).
   class CliTool
+    extend Callable
+
     protected
 
     # Executes an external shell command securely using Open3 capture mechanics.

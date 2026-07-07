@@ -11,7 +11,7 @@ module Flatplan
         extend Forwardable
 
         # Proxy core ports to the internal underlying container instance
-        def_delegators :@instance, :file_store
+        def_delegators :@instance, :file_store, :metadata_store
 
         # Freezes and registers the global infrastructure context.
         #

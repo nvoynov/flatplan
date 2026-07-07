@@ -17,7 +17,7 @@ module Flatplan
       def_delegator :'Flatplan::Config', :instance, :config
 
       # Delegate core infrastructure context calls directly to the object level
-      def_delegators :'Flatplan::Ports::Context', :file_store
+      def_delegators :'Flatplan::Ports::Context', :file_store, :metadata_store
     end
   end
 end
