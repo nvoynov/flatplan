@@ -1,0 +1,952 @@
+[
+  {
+    "filename": "DP0Q0578.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:11:10 16:55:31",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp0 Quattro",
+    "lens": "14mm F4 ULTRA WIDE"
+  },
+  {
+    "filename": "DP0Q0624.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2024:12:06 02:11:04",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp0 Quattro",
+    "lens": "14mm F4 ULTRA WIDE"
+  },
+  {
+    "filename": "DP2Q0342.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:03:18 14:17:23",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": 1007
+  },
+  {
+    "filename": "DP2Q0346.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:03:18 14:24:52",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": 1007
+  },
+  {
+    "filename": "DP2Q1941.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2018:11:08 15:16:03",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3491.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:11:10 16:34:39",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3507.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:11:13 16:24:10",
+    "title": null,
+    "description": null,
+    "camera": "dp2 Quattro",
+    "lens": "Unknown"
+  },
+  {
+    "filename": "DP2Q3516.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:11:14 14:47:44",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3521.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:11:14 15:04:02",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3636.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2025:03:08 09:50:55",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3642.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2025:03:08 09:58:43",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3663.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2025:03:13 08:29:45",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3680.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2025:03:16 11:09:13",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3688.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2025:03:17 09:17:35",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3713.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2025:03:27 09:01:38",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3714.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2025:03:27 09:02:21",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0541.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:05:27 13:29:12",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0549.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:05:27 17:52:26",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0554.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:05:27 19:01:57",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0558.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:05:27 19:10:47",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0559.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:05:27 19:13:11",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0562.tif",
+    "width": 3616,
+    "height": 5424,
+    "captured_at": "2017:05:28 07:26:13",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0578.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:05:28 15:28:05",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0595.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:05:29 05:25:35",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0978.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:09:20 16:58:34",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0980.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:09:20 17:05:22",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0993.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:09:21 17:10:16",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0995.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:09:21 17:12:49",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0647.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:06:18 14:15:39",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0754.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:07:09 17:26:00",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM1102.tif",
+    "width": 3616,
+    "height": 5424,
+    "captured_at": "2017:10:22 16:27:39",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM1197.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:12:03 15:38:02",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM1216.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:12:25 13:44:09",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM1223.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:12:25 15:00:34",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM1228.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:12:25 15:21:24",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM1237.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:12:25 15:35:30",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0713.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:07:03 18:46:49",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0733.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:07:03 20:02:56",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0738.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:07:03 20:06:31",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP0Q0398.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:10:24 12:12:32",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp0 Quattro",
+    "lens": "14mm F4 ULTRA WIDE"
+  },
+  {
+    "filename": "DP0Q0401.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:10:24 12:32:30",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp0 Quattro",
+    "lens": "14mm F4 ULTRA WIDE"
+  },
+  {
+    "filename": "DP0Q0408.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:10:24 13:12:51",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp0 Quattro",
+    "lens": "14mm F4 ULTRA WIDE"
+  },
+  {
+    "filename": "DP0Q0409.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:10:24 13:13:31",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp0 Quattro",
+    "lens": null
+  },
+  {
+    "filename": "DP0Q0433.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:11:01 11:00:42",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp0 Quattro",
+    "lens": "14mm F4 ULTRA WIDE"
+  },
+  {
+    "filename": "DP0Q0458.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:11:01 12:13:03",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp0 Quattro",
+    "lens": "14mm F4 ULTRA WIDE"
+  },
+  {
+    "filename": "DP2Q2173.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2019:05:30 14:14:55",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": null
+  },
+  {
+    "filename": "DP2Q2181.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2019:05:30 14:23:23",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2192.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2019:05:30 14:40:49",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2200.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2019:05:30 14:47:53",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2918.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:10:24 12:11:21",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2948.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:10:24 13:55:09",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2949.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:10:24 13:55:49",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2953.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:10:24 14:21:09",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2956.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:11:01 10:01:59",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2957.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:11:01 10:02:20",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2959.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:11:01 10:07:02",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2962.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:11:01 10:12:31",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2977.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:11:01 10:59:33",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP0Q0549.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:06 08:55:00",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp0 Quattro",
+    "lens": "14mm F4 ULTRA WIDE"
+  },
+  {
+    "filename": "DP2Q2551.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:05 12:03:31",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": null
+  },
+  {
+    "filename": "DP2Q2553.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:05 12:14:42",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2554.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:05 12:17:18",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2557.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:05 12:30:32",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2558.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:05 12:31:07",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2568.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:06 12:45:05",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2569.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:06 12:45:52",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2575.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:06 13:01:22",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2583.tif",
+    "width": 3616,
+    "height": 5424,
+    "captured_at": "2020:05:06 13:20:38",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2595.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:06 16:58:45",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2604.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:06 18:26:29",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2644.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:07 16:43:05",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2655.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:07 18:09:45",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2659.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:07 18:24:26",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2697.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:09 09:57:26",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2714.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:09 10:50:44",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2734.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:05:09 19:09:56",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q2788.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2020:09:26 15:50:49",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3160.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:04 11:27:14",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3166.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:05 12:29:09",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3196.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:06 08:19:02",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3201.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:06 08:45:41",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3203.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:06 08:52:32",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3216.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:06 10:37:14",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3217.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:06 10:37:35",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3223.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:06 11:46:01",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3253.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:06 17:14:40",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3271.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:07 09:35:59",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3280.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:07 16:22:29",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3296.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:07 17:47:23",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3297.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:08 09:26:01",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": null
+  },
+  {
+    "filename": "DP2Q3313.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:08 14:43:32",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3340.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:08 17:59:51",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3349.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:08 18:26:28",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "DP2Q3359.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2021:05:09 11:43:23",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  },
+  {
+    "filename": "SDIM0826.tif",
+    "width": 5424,
+    "height": 3616,
+    "captured_at": "2017:07:23 06:21:08",
+    "title": null,
+    "description": null,
+    "camera": "SIGMA dp2 Quattro",
+    "lens": "30mm F2.8"
+  }
+]

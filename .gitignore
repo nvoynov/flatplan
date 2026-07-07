@@ -1,1 +1,10 @@
+# handful work artifacts
 ./sandbox.*
+
+# --- private data and configuration
+./data/*
+./*.yml
+
+# --- OS specific metadata exclusions ---
+.DS_Store
+Thumbs.db

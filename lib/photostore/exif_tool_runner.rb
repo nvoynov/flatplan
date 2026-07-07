@@ -1,7 +1,8 @@
 require 'json'
 require_relative 'basic'
 
-module PhotoBook
+module PhotoStore
+  
   # Independent system utility execution runner that leverages ExifTool
   # to query image hardware specs, capture timestamps, and creative metadata.
   class ExifToolRunner < ::Basic::CliTool
@@ -32,11 +33,11 @@ module PhotoBook
         raise "ExifTool failed to parse file at #{file_path}"
       end
 
-      image_key = File.basename(file_path, ".*")
+      filename = File.basename(file_path)
 
       # Temporary return structure until the domain Model layer is refactored
       {
-        image_key: image_key,
+        filename: filename,
         width: parsed["ImageWidth"]&.to_i,
         height: parsed["ImageHeight"]&.to_i,
         captured_at: parsed["DateTimeOriginal"],

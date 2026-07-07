@@ -2,20 +2,12 @@
 
 ## TODO
 
-- [ ] Check if ExifTool inside the system
+__PhotoStore__
 
-- [ ] flatplan polishing session
-  - [ ] write Stonetomb artistic narrative
-  - [ ] create Stonetomb artistic manifest
-  - [ ] check PandocManifest serialization and browser preview
-  - [ ] optimize Stonetomb series for SEO
-  - [ ] what SEO suitable metadata should be added to the artistic
-        narrative, that have no concern to the series publication
-        itself but helpful for other possible usage of the series?
-        maybe, the publication itself and its assets should provide
-        the ability to store some metadata 
-  - [ ] discuss not handling but presering metadata changes; other
-        helpful staff like publication assets (across all sections) 
+- [ ] show some progress during ExifToolRunner, it freezes terminal too long
+
+
+- [ ] review Stonetomp again, some images removed; maybe review artistic narrative
 - [ ] provide uniq `flatplan` prefix for all style entries such as divs, classes, etc.
   - [ ] change Pandoc Manifest generation for using new html things
   - [ ] accordingly change `style.css`
@@ -26,11 +18,6 @@
         where all data aggregates computed playing log events
   - [ ] design mixing information from other stores, like image metadata, maybe series publicaction to get the editor curated titles, descriptions, tags, location, etc.      
   - [ ] desing CLI query data interface based on image key
-- [ ] design PhotoBook (maybe PhotoStore, ImageMetadataRegistry, play with names and choose a short and concise one) to provide image metadata like original image size, timestamp of the shutter click, etc.
-  - [ ] design data model
-  - [ ] it gets initial metadata by using ExifTool
-  - [ ] it mixes information from series publications (flatplan) like loation, title, poetic description
-  - [ ] desing CLI query data interface based on image key
 - [ ] prepare the `Exposure` Jekyll site for `Zenweb` transition 
   - [ ] ImageMagic adapter as an individual CLI tool component (ImageMaster, ImageManager, ImageArtist, ImageTransformer, Fusion...); adopt the tool for Rake interface
   - [ ] how to port JS, such as `sw.js`, `Todd Hido mosaic`, and `mobile image-rotator`?
@@ -39,6 +26,18 @@
   - [ ] redesing `/about` page for mentioning print clearence and some helpful metadata inside html page source?
   - [ ] desing `/print-clearence` page based on PrintBook
   - [ ] design `/prints` page based on PrintBook 
+
+
+## 2026-07-07
+
+- designed new PhotoStore component (see `lib/photostore` structure) and `bin/photostore` CLI that gives the access to the master metadata store
+- designed new guides/flatplan-user-guile.md
+- extracted stories from exposure (specs/FLATPLAN-USER-STORIES.md) 
+
+## 2026-07-06
+
+- planned some series manifest changes for describing publications and media assets; that should improve SEO; implementation blocked by introducing new PhotoStroe component (further)
+- starded design of the PhotoStore component that will provide master image metatadata for other parties
 
 ## 2026-07-05
 

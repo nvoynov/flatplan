@@ -1,0 +1,9 @@
+---
+masters_dir: /home/nick/Photo/Albums
+supproted_extentions:
+- ".tif"
+- ".tiff"
+- ".jpg"
+- ".jpeg"
+datastore_path: data
+datastore: photostore.json

@@ -1,10 +1,11 @@
 # lib/photostore/image.rb
 
 module PhotoStore
+
   # An immutable value object representing the complete technical and creative
   # blueprint of a physical master image file extracted from EXIF/IPTC tags.
   Image = Data.define(
-    :image_key,    # [String] unique filename root identifier (e.g., "DP2Q2173")
+    :filename,     # [String] filename serve for root identifier (e.g., "DP2Q2173")
     :width,        # [Integer, nil] original master width in pixels
     :height,       # [Integer, nil] original master height in pixels
     :captured_at,  # [String, nil] timestamp of the shutter click
