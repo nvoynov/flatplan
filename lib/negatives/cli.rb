@@ -1,19 +1,24 @@
 require_relative 'store'
+require_relative 'version'
 
-module PhotoStore
+module Negatives
 
+  # Command-line Interface
   module CLI
     extend self
+
+    BANNER = <<~TEXT.strip
+      Negatives metadata store
+      Version #{VERSION}
+
+      Usage:       
+        bin/negatives <image_1> [<image_2> ..]
+    TEXT
 
     # TODO: make version and banner files
     def call
       if ARGV.empty?
-        puts <<~BANNER.strip
-          Metadata Store v0.1.0
-          Usage:
-            photostore <image_1> [<image_2> ..]
-        BANNER
-
+        puts BANNER
         exit
       end
 
@@ -23,9 +28,7 @@ module PhotoStore
           store
             .slice(*ARGV)
             .values
-            # .tap{ puts "bin/photostore values"; pp it}
             .map(&:to_h)
-            # .tap{ pp it }
         else
           store
             .get(ARGV.shift)

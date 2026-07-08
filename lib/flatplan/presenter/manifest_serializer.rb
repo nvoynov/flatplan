@@ -2,10 +2,6 @@
 
 require_relative "base"
 
-# lib/flatplan/presenter/manifest_serializer.rb
-
-require_relative "base"
-
 module Flatplan
   module Presenter
     # Serializes a domain SeriesPublication entity back into a clean,
@@ -21,13 +17,11 @@ module Flatplan
         # 1. Generate Structured YAML Front Matter Block
         buffer << "---"
         buffer << "title: '#{publication.title}'"
-        buffer << "author: '#{publication.author || 'Unknown Author'}'"
+        buffer << "author: publication.author"
         buffer << "date: '#{publication.date || Time.now.strftime("%Y-%m-%d")}'"
-        buffer << "location: '#{publication.location}'" if publication.location
-        if publication.keywords && !publication.keywords.empty?
-          buffer << "keywords: #{publication.keywords.inspect}"
-        end
-        buffer << "description: '#{publication.description}'" if publication.description
+        buffer << "location: '#{publication.location}'"
+        buffer << "keywords: #{publication.keywords.inspect}"
+        buffer << "description: '#{publication.description}'"
         buffer << "---\n"
 
         # 2. Process Sections in sequential order based on explicit domain types

@@ -8,7 +8,7 @@ module Flatplan
     
     # Concrete Hexagonal Infrastructure Adapter that connects the abstract
     # Ports::FileStore port directly to the host operating system file system.
-    class PhotoStoreMetadata < Ports::MetadataStore
+    class NegativesMetadata < Ports::MetadataStore
       # @see Ports::MetadataStore#fetch
       # @return [Hash<Key symbol, Metadata hash >]
       def fetch(*keys)
@@ -24,7 +24,7 @@ module Flatplan
         def call(*image_keys)
           return [] if image_keys.empty?
 
-          binary_path = File.join(Dir.pwd, "bin", "photostore")
+          binary_path = File.join(Dir.pwd, "bin", "negatives")
           raw_json = execute_command(binary_path, *image_keys)
           return [] if raw_json.strip.empty?
 

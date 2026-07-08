@@ -1,12 +1,12 @@
 require 'json'
-require_relative 'basic'
+require 'time'
+require_relative 'config'
 
-module PhotoStore
+module Negatives
   
   # Independent system utility execution runner that leverages ExifTool
   # to query image hardware specs, capture timestamps, and creative metadata.
-  class ExifToolRunner < ::Basic::CliTool
-    extend ::Basic::Callable
+  class Scanner < ::Basic::CliTool
 
     def initialize
       # Verify if the target binary is installed and executable in the system
@@ -22,7 +22,7 @@ module PhotoStore
       config = Config.instance
 
       # 1. Build explicit extension filtering flags for ExifTool CLI (e.g. -ext tif -ext tiff)
-      ext_flags = config.supported_extensions.flat_map do |ext|
+      ext_flags = config.image_extensions.flat_map do |ext|
         ["-ext", ext.sub(".", "")]
       end
 
@@ -33,22 +33,48 @@ module PhotoStore
         "-ImageWidth", "-ImageHeight", "-DateTimeOriginal",
         "-ObjectName", "-Caption-Abstract", "-Model", "-LensModel",
         *ext_flags,
-        config.masters_dir
+        config.negatives_dir
       )
 
       JSON.parse(raw_json).map do |parsed|
+        filename = parsed["SourceFile"]
+        original = parsed['DateTimeOriginal']
+        captured_at = original ? exif_time(original) : File.mtime(filename)  
         {
-          filename: parsed["SourceFile"],
+          filename: filename,
           width: parsed["ImageWidth"]&.to_i,
           height: parsed["ImageHeight"]&.to_i,
-          captured_at: parsed["DateTimeOriginal"],
+          captured_at: captured_at,
           title: parsed["ObjectName"] || parsed["Title"],
           description: parsed["Caption-Abstract"] || parsed["Description"],
           camera: parsed["Model"],
           lens: parsed["LensModel"] || parsed["Lens"]
         }
       end
-      
     end
+
+    
+    # TODO: maybe clean some trash data files information like the following
+    #       produced together by Sigma Photo Pro + Raw Therapee
+    # {
+    #   "filename": "/home/nick/Photo/Albums/Dnestr/._SDIM0578.tif",
+    #   "width": null,
+    #   "height": null,
+    #   "captured_at": "2026-06-19 00:03:03 +0300",
+    #   "title": null,
+    #   "description": null,
+    #   "camera": null,
+    #   "lens": null
+    # },
+    
+    private
+    
+    # ExifTool presents date and time as "2020:11:01 12:13:03"),
+    # that is EXIF (TIFF/JPEG) metadat representation standard
+    # partly based on ISO 8601, but using ":" instead of "-"
+    #   Time.strptime(exif_string, "%Y:%m:%d %H:%M:%S")
+    
+    EXIF_TIME_FORMAT = '%Y:%m:%d %H:%M:%S'.freeze
+    def exif_time(ts) = Time.strptime(ts, EXIF_TIME_FORMAT)
   end
 end

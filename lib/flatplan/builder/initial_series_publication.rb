@@ -15,23 +15,29 @@ module Flatplan
       # @param metadata [Hash] haso of image metadata
       # @return [Model::SeriesPublication] a populated series domain entity
       # @raise [ArgumentError] if the series title is blank or empty
-      def call(title:, raw_text: nil, filenames: [], metadata: {})
+      def call(title:, keywords: [], raw_text: nil, filenames: [], metadata: {})
         if title.nil? || title.strip.empty?
           raise ArgumentError, "Publication title cannot be blank"
         end
 
-        pp metadata
-        publication = Model::SeriesPublication.new(title: title.strip)
+        publication = Model::SeriesPublication.new(
+          title: title.strip,
+          keywords:,
+          author: config.author
+        )
+        
         paragraphs = raw_text.to_s.split("\n\n").map { it.strip }.reject { it.empty? }
-        assets = filenames.map do |file|
-          file_key = File.basename(file, ".*")
+        assets = filenames.map do |filename|
+          file_key = File.basename(filename, ".*")
           match = metadata[file_key] || {}
-          
+          captured_at = match['captured_at']
+          captured_at = captured_at ? Time.parse(captured_at) : Time.now 
+         
           Model::LayoutAsset.new(
-            filename: file,
+            filename: filename,
             caption: "Fallback caption",
-            title: match["title"],        
-            captured_at: match["captured_at"]
+            title: match['title'] || '',
+            captured_at: captured_at
           )          
         end
           

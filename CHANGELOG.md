@@ -24,9 +24,38 @@ __PhotoStore__
   - [ ] how to port CSS for presenting series colage of 5 images?
   - [ ] how to port Lightbox?
   - [ ] redesing `/about` page for mentioning print clearence and some helpful metadata inside html page source?
-  - [ ] desing `/print-clearence` page based on PrintBook
-  - [ ] design `/prints` page based on PrintBook 
+  - [ ] desing `/print-clearence` page based on Imprint
+  - [ ] design `/prints` page based on Imprint
 
+
+__Flatplan__
+
+- [ ] `MediaAsset#captured_at` must be `Time`
+- [ ] extract `MediaAssetSerializer`; it will be extened on the Exposure side for integratiing Negatives and Imprint
+- [ ] `MediaAssetSerializer` writes Kairos hints for empty caption/title
+      ```
+      ![]()
+      caption:
+      caption_kairos_hint_basic: bla-bla-bla [focus]
+      caption_kairos_hint_social: for bar [focus] baz   
+      ```
+- [ ] check `bin/flatplan preview SERIES` for real images, maybe by
+  - [ ] providing full path to the image
+  - [ ] placing style.css right into the series folder and generate pandoc in place
+
+
+## 2026-07-08
+
+- created `lib/kairos.rb`
+- created `guides/image-manifest-and-seo-integration-guide.md`
+- flatplan: added :author and :default_keywords to configuration 
+- flatplan: usse :author and :default_keywords
+- flatplan: added `./flatplan.yml` configuratin settings
+- photostore renamed for `negatives`
+- basic got `Configuration` and `Model`
+- negatives config refactored for using `Basic::Configuration`
+- designed Dockerfile with image-magic, exiftool, pandoc, ...
+- chosen `Imprint` name instead of `PrintBook`
 
 ## 2026-07-07
 

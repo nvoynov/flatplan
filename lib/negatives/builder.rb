@@ -1,6 +1,6 @@
-require_relative 'exif_tool_runner'
+require_relative 'scanner'
 
-module PhotoStore
+module Negatives
 
   # Recursively traverses master image storage paths, processes extended EXIF 
   # metadata metrics, and compiles a flat JSON database dump inside 
@@ -22,11 +22,10 @@ module PhotoStore
         if File.exist?(@config.datastore)
           JSON.load_file(@config.datastore, {symbolize_names: true})
         else
-          ExifToolRunner.call
-            .tap{ File.write(@config.datastore, JSON.pretty_generate(it)) }
+          data = Scanner.call
+          File.write(@config.datastore, JSON.pretty_generate(data))
         end
       
-      # TODO: try to mix absent data from other sources, 
       records
         .map{ Image.new(**it) }
         .map{ [ File.basename(it.filename, '.*').to_sym, it ] }

@@ -1,0 +1,14 @@
+---
+image_extensions:
+- ".webp"
+- ".jpg"
+- ".jpeg"
+- ".png"
+- ".tif"
+- ".tiff"
+series_manifest_name: SERIES.md
+author: Unknown Author
+default_keywords:
+- fine-art
+- photography
+- documentary

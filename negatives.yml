@@ -1,0 +1,6 @@
+---
+negatives_dir: "/home/nick/Photo/Albums"
+image_extensions:
+- ".tif"
+- ".rw2"
+datastore: data/negatives.json

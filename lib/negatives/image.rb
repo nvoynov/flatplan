@@ -1,6 +1,4 @@
-# lib/photostore/image.rb
-
-module PhotoStore
+module Negatives
 
   # An immutable value object representing the complete technical and creative
   # blueprint of a physical master image file extracted from EXIF/IPTC tags.

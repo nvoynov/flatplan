@@ -11,7 +11,7 @@ module Flatplan
       # @param raw_text [String, nil] optional starting text for the album
       # @return [String] the absolute path to the newly written manifest file
       # @raise [ArgumentError] if the directory path is invalid or missing
-      def call(directory_path:, raw_text: nil)
+      def call(directory_path:, raw_text: nil, keywords: [])
         unless file_store.directory_exists?(directory_path)
           raise ArgumentError, "Target directory does not exist: #{directory_path}"
         end
@@ -33,11 +33,11 @@ module Flatplan
         # 0. Try to get images metadata
         keys = images.map{ File.basename(it, '.*') }
         metadata = metadata_store.fetch(*keys)
-        pp'keys', keys, 'metadata', metadata
+        # pp'keys', keys, 'metadata', metadata
         
         # 1. Compilation Step (Builder shortcut call)
         publication = BuildInitialSeriesPublication.call(
-          title:, raw_text:, filenames: images, metadata:
+          title:, raw_text:, filenames: images, metadata:, keywords:,
         )
 
         # 2. Serialization Step (Presenter shortcut call)

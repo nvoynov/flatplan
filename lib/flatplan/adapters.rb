@@ -1,5 +1,5 @@
 require_relative 'adapters/file_system_store'
-require_relative 'adapters/photostore_metadata'
+require_relative 'adapters/negatives_metadata'
 
 module Flatplan
 
@@ -8,5 +8,5 @@ module Flatplan
   end
 
   FileSystemStoreAdapter = Adapters::FileSystemStore
-  PhotoStoreMetadataAdapter = Adapters::PhotoStoreMetadata
+  NegativesMetadataAdapter = Adapters::NegativesMetadata
 end

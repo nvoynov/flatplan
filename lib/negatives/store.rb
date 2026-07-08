@@ -1,6 +1,6 @@
 require_relative 'builder'
 
-module PhotoStore
+module Negatives
   # Central database registry managing technical metadata sheets for master files.
   class Store
     def initialize
