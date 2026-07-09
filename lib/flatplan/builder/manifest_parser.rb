@@ -33,7 +33,8 @@ module Flatplan
         )
 
         # 2. Filter empty rows from the remaining body
-        clean_lines = remaining_lines.reject(&:empty?)
+        clean_lines = remaining_lines # TODO: eliminate "magic" kairos_
+          .reject{ it.empty? || it.start_with?('kairos_') }
 
         # 3. Slice content into separate topic blocks
         raw_topics = slice_into_topics(clean_lines)
@@ -128,7 +129,7 @@ module Flatplan
           elsif line.start_with?("title:") && last_asset
             last_asset.title = line.split(":", 2).last.strip
           elsif line.start_with?("captured_at:") && last_asset
-            last_asset.captured_at = line.split(":", 2).last.strip
+            last_asset.captured_at = line.split(":", 2).last.strip.then{ Time.new(it) }
           elsif line.start_with?("![") && line.include?("](")
             match = line.match(/!\[(.*?)\]\((.*?)\)/)
             if match

@@ -26,6 +26,12 @@ module Negatives
           File.write(@config.datastore, JSON.pretty_generate(data))
         end
       
+      # FIXME: there is a stragnge bug for the first method call
+      #        undefined method 'map' for an instance of Integer
+      #        for .map{ Image.new(**it) }
+      #        but it only happens for new records writtten
+      #        maybe because of symbolized_names: true
+      #       
       records
         .map{ Image.new(**it) }
         .map{ [ File.basename(it.filename, '.*').to_sym, it ] }

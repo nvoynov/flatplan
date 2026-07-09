@@ -1,5 +1,4 @@
-# lib/flatplan/presenter/manifest_serializer.rb
-
+require_relative '../../kairos'
 require_relative "base"
 
 module Flatplan
@@ -12,12 +11,13 @@ module Flatplan
       # @param publication [Model::SeriesPublication] the source domain entity
       # @return [String] formatted Markdown manifest ready to be saved to disk
       def call(publication)
+        @publication = publication
         buffer = []
 
         # 1. Generate Structured YAML Front Matter Block
         buffer << "---"
         buffer << "title: '#{publication.title}'"
-        buffer << "author: publication.author"
+        buffer << "author: #{publication.author}"
         buffer << "date: '#{publication.date || Time.now.strftime("%Y-%m-%d")}'"
         buffer << "location: '#{publication.location}'"
         buffer << "keywords: #{publication.keywords.inspect}"
@@ -59,7 +59,16 @@ module Flatplan
         buffer << "![#{asset.caption}](#{asset.filename})"
         buffer << "title: #{asset.title}" if asset.title
         buffer << "captured_at: #{asset.captured_at}" if asset.captured_at
-        buffer << "" # Universally guarantees an elegant whitespace break under every card
+
+        # Kairos hints
+        if asset.captured_at && asset.title.empty?
+          Kairos
+            .call(asset.captured_at, @publication.keywords)
+            .map{ "kairos_#{it.first}_hint: #{it.last}" }
+            .each{ buffer << it }
+        end
+        
+        buffer << "" # guarantees an whitespace break under every card
       end
     end
   end

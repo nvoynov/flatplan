@@ -1,0 +1,37 @@
+Run options: --seed 65309
+
+# Running:
+
+#<Sandbox::Configuration1:0x0000757808e6ab68
+ @data=#<data Sandbox::ConfigurationData foo="foo", bar="bar">,
+ @file_path="/home/nick/src/web/flatplan/sandbox.yml">
+..........F
+
+Finished in 0.015971s, 688.7465 runs/s, 1502.7197 assertions/s.
+
+  1) Failure:
+Manifest Serialize/Load dry-run#test_0001_must serialize and load manifests [test/flatplan/service/test_dry_run.rb:9]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-
+#<Flatplan::Model::SeriesPublication:0xXXXXXX
+@title="Basic Publication",
+@author="Nikolay Voynov", @date="2020-2021", @location="Svalovichi, Ukraine",
+@keywords=["fine-art", "documentary", "steppe"],
+@description="A comprehensive baseline test fixture story description.",
+@sections=[#<Flatplan::Model::TextAndMediaSection:0xXXXXXX @media_assets=[
+  #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q1510.tif", @caption="Fallback caption",
+  @title="Ut ut ad dolor", @captured_at=2020-04-15 12:00:00 +0300, @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q9132.tif", @caption="Fallback caption", @title="Voluptate excepteur ut consectetur ad", @captured_at=2024-08-26 12:00:00 +0300, @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q2324.tif", @caption="Fallback caption", @title="Magna aliquip ipsum enim eu", @captured_at=2024-03-06 12:00:00 +0200, @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q3595.tif", @caption="Fallback caption", @title="Qui eu sint dolore officia", @captured_at=2023-06-06 12:00:00 +0300, @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q0609.tif", @caption="Fallback caption", @title="Dolore id dolor enim", @captured_at=2021-09-02 12:00:00 +0300, @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q4164.tif", @caption="Fallback caption", @title="Do id dolore consequat. commodo", @captured_at=2021-02-05 12:00:00 +0200, @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q6997.tif", @caption="Fallback caption", @title="Officia culpa consequat. pariatur. nisi", @captured_at=2023-08-26 12:00:00 +0300, @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q0623.tif", @caption="Fallback caption", @title="Veniam, proident, culpa", @captured_at=2020-03-27 12:00:00 +0200, @width=nil, @height=nil>], @text_alignment=:left, @media_alignment=:right, @paragraphs=["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."], @spacing=:medium>]>
+
+#<Flatplan::Model::SeriesPublication:0xXXXXXX
+@title="Basic Publication",
+@author="Nikolay Voynov", @date="2020-2021", @location="Svalovichi, Ukraine",
+@keywords=["fine-art", "documentary", "steppe"],
+@description="A comprehensive baseline test fixture story description.",
+@sections=[#<Flatplan::Model::TextAndMediaSection:0xXXXXXX @media_assets=[
+  #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q1510.tif", @caption="Fallback caption",
+  @title="Ut ut ad dolor", @captured_at="2020-04-15 12:00:00 +0300", @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q9132.tif", @caption="Fallback caption", @title="Voluptate excepteur ut consectetur ad", @captured_at="2024-08-26 12:00:00 +0300", @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q2324.tif", @caption="Fallback caption", @title="Magna aliquip ipsum enim eu", @captured_at="2024-03-06 12:00:00 +0200", @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q3595.tif", @caption="Fallback caption", @title="Qui eu sint dolore officia", @captured_at="2023-06-06 12:00:00 +0300", @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q0609.tif", @caption="Fallback caption", @title="Dolore id dolor enim", @captured_at="2021-09-02 12:00:00 +0300", @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q4164.tif", @caption="Fallback caption", @title="Do id dolore consequat. commodo", @captured_at="2021-02-05 12:00:00 +0200", @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q6997.tif", @caption="Fallback caption", @title="Officia culpa consequat. pariatur. nisi", @captured_at="2023-08-26 12:00:00 +0300", @width=nil, @height=nil>, #<Flatplan::Model::LayoutAsset:0xXXXXXX @filename="DP2Q0623.tif", @caption="Fallback caption", @title="Veniam, proident, culpa", @captured_at="2020-03-27 12:00:00 +0200", @width=nil, @height=nil>], @text_alignment=:left, @media_alignment=:right, @paragraphs=["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."], @spacing=:medium>]>
+
+
+11 runs, 24 assertions, 1 failures, 0 errors, 0 skips

@@ -14,7 +14,7 @@ module Flatplan
       # @return [String, nil] individual artistic title curated for this series
       attr_accessor :title
 
-      # @return [String, nil] specific timestamp metadata of the shutter click
+      # @return [Time, nil] specific timestamp metadata of the shutter click
       attr_accessor :captured_at
 
       # @return [Integer, nil] original image width in pixels
@@ -28,7 +28,7 @@ module Flatplan
       # @param filename [String] the asset identifier or file path
       # @param caption [String, nil] fallback template caption
       # @param title [String, nil] fine-art custom title string
-      # @param captured_at [String, nil] timestamp metadata string
+      # @param captured_at [Time, nil] timestamp metadata string
       # @param width [Integer, nil] source image width
       # @param height [Integer, nil] source image height
       def initialize(
@@ -41,8 +41,8 @@ module Flatplan
       )
         super()
         @filename = filename
-        @caption = caption
-        @title = title
+        @caption = caption || ''
+        @title = title || ''
         @captured_at = captured_at
         @width = width
         @height = height

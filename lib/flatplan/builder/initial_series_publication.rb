@@ -26,12 +26,17 @@ module Flatplan
           author: config.author
         )
         
-        paragraphs = raw_text.to_s.split("\n\n").map { it.strip }.reject { it.empty? }
+        raw_text = ::Basic::LOREM_IPSUM unless raw_text
+        paragraphs = raw_text
+          .split("\n\n")
+          .map { it.strip }
+          .reject { it.empty? }
+
         assets = filenames.map do |filename|
           file_key = File.basename(filename, ".*")
           match = metadata[file_key] || {}
           captured_at = match['captured_at']
-          captured_at = captured_at ? Time.parse(captured_at) : Time.now 
+          captured_at = captured_at ? Time.new(captured_at) : Time.now 
          
           Model::LayoutAsset.new(
             filename: filename,

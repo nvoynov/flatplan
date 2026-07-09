@@ -21,11 +21,13 @@ module Flatplan
       protected
 
       class PhotoStoreCli < ::Basic::CliTool
+        executable File.join(Dir.pwd, 'bin', 'negatives')
+        
         def call(*image_keys)
           return [] if image_keys.empty?
 
-          binary_path = File.join(Dir.pwd, "bin", "negatives")
-          raw_json = execute_command(binary_path, *image_keys)
+          # binary_path = File.join(Dir.pwd, "bin", "negatives")
+          raw_json = execute_command(*image_keys)
           return [] if raw_json.strip.empty?
 
           parsed_data = JSON.parse(raw_json)

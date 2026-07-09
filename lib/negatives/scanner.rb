@@ -7,14 +7,8 @@ module Negatives
   # Independent system utility execution runner that leverages ExifTool
   # to query image hardware specs, capture timestamps, and creative metadata.
   class Scanner < ::Basic::CliTool
-
-    def initialize
-      # Verify if the target binary is installed and executable in the system
-      unless system("command -v exiftool >/dev/null 2>&1")
-        raise RuntimeError, "ExifTool CLI dependency is missing in this OS!"
-      end
-    end
-
+    executable :exiftool
+    
     # Extracts metadata and compiles it into a temporary hash structure.
     #
     # @return [Hash] extracted metadata registry
@@ -29,7 +23,7 @@ module Negatives
       # 2. Invoke the external tool once for the whole directory tree natively
       # We ask ExifTool to output JSON (-j) and do a recursive folder scan (-r)
       raw_json = execute_command(
-        "exiftool", "-j", "-r",
+        "-j", "-r",
         "-ImageWidth", "-ImageHeight", "-DateTimeOriginal",
         "-ObjectName", "-Caption-Abstract", "-Model", "-LensModel",
         *ext_flags,

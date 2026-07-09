@@ -4,13 +4,7 @@
 
 __PhotoStore__
 
-- [ ] show some progress during ExifToolRunner, it freezes terminal too long
-
-
-- [ ] review Stonetomp again, some images removed; maybe review artistic narrative
-- [ ] provide uniq `flatplan` prefix for all style entries such as divs, classes, etc.
-  - [ ] change Pandoc Manifest generation for using new html things
-  - [ ] accordingly change `style.css`
+- [ ] review Stonetomp again, maybe change artistic narrative
 - [ ] design PrintBook for managing prints data (DSL manner) to provide prints information on web-site
   - [ ] design data model (will drive DSL development and evolution)
   - [ ] design the component interface for querying prints availability for particular image (:DP2Q1058, :P01013456) 
@@ -30,19 +24,19 @@ __PhotoStore__
 
 __Flatplan__
 
-- [ ] `MediaAsset#captured_at` must be `Time`
-- [ ] extract `MediaAssetSerializer`; it will be extened on the Exposure side for integratiing Negatives and Imprint
-- [ ] `MediaAssetSerializer` writes Kairos hints for empty caption/title
-      ```
-      ![]()
-      caption:
-      caption_kairos_hint_basic: bla-bla-bla [focus]
-      caption_kairos_hint_social: for bar [focus] baz   
-      ```
-- [ ] check `bin/flatplan preview SERIES` for real images, maybe by
-  - [ ] providing full path to the image
-  - [ ] placing style.css right into the series folder and generate pandoc in place
+- [ ] decompose publication serializer for separate models serialization; provide some configuation of serializes inside that will work for mixing image attributes for exposure site.
+- [ ] maybe extend Kairos by moon cycles?
 
+## 2026-07-09
+
+- changed `MediaAsset#captured_at` type for `Time`; appropriate changes done for `ManifestSerializer` and `InitialSeriesPublication`
+- changed `ManifestSerializer` for providing `Kairos` hints
+- changed `ManifestParser` for skiping `Kairos` hints
+- added `Basic::LOREM_IPSUM`
+- changed `InitialSeriesPublicaton` for providing LOREM_IPSUM for emtpy raw_text
+- improved `Basic::CliTool` by providing DSL method #executable for the tool configuration; all descendants changed accrordingly
+- applied `Basid::Configuration` for flatplan
+- `bin/flatplan preview` WORKS! 
 
 ## 2026-07-08
 

@@ -34,21 +34,23 @@ module Dummy
       end
     end
   end
+
+  def mktime
+    year = rand(2020..2024)
+    month = rand(1..12).to_s.rjust(2, "0")
+    day = rand(1..28).to_s.rjust(2, "0")
+    Time.new("#{year}-#{month}-#{day} 12:00:00")
+  end
   
   # @return [Array<Flatplan::Model::LayoutAsset>]
   def media_assets
     @media_assets ||= asset_filenames
       .map.with_index do |e, index|
-        # Align with the official EXIF DateTimeOriginal standard string format
-        year = rand(2020..2024)
-        month = rand(1..12).to_s.rjust(2, "0")
-        day = rand(1..28).to_s.rjust(2, "0")
-        
         Flatplan::Model::LayoutAsset.new(
           filename: e,
           caption: "Fallback caption",
           title: asset_titles[index],
-          captured_at: "#{year}:#{month}:#{day} 12:00:00" # Идеальное EXIF-соответствие
+          captured_at: mktime
         )
       end
   end

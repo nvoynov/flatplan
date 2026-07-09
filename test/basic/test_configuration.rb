@@ -25,7 +25,6 @@ describe ::Basic::Configuration do
 
   it 'must provide file_name' do
     assert_equal 'sandbox.yml', config1.class.target_file
-    pp config1
   end
 
   it 'must provide managed properties' do
