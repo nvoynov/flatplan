@@ -2,30 +2,49 @@
 
 ## TODO
 
-__PhotoStore__
+__Series__
 
-- [ ] review Stonetomp again, maybe change artistic narrative
-- [ ] design PrintBook for managing prints data (DSL manner) to provide prints information on web-site
-  - [ ] design data model (will drive DSL development and evolution)
-  - [ ] design the component interface for querying prints availability for particular image (:DP2Q1058, :P01013456) 
-  - [ ] design DSL for the book management; also serves and event log
-        where all data aggregates computed playing log events
-  - [ ] design mixing information from other stores, like image metadata, maybe series publicaction to get the editor curated titles, descriptions, tags, location, etc.      
-  - [ ] desing CLI query data interface based on image key
-- [ ] prepare the `Exposure` Jekyll site for `Zenweb` transition 
-  - [ ] ImageMagic adapter as an individual CLI tool component (ImageMaster, ImageManager, ImageArtist, ImageTransformer, Fusion...); adopt the tool for Rake interface
-  - [ ] how to port JS, such as `sw.js`, `Todd Hido mosaic`, and `mobile image-rotator`?
-  - [ ] how to port CSS for presenting series colage of 5 images?
-  - [ ] how to port Lightbox?
-  - [ ] redesing `/about` page for mentioning print clearence and some helpful metadata inside html page source?
-  - [ ] desing `/print-clearence` page based on Imprint
-  - [ ] design `/prints` page based on Imprint
+- [ ] review Stonetomp again, maybe change artistic narrative and layout
+- [ ] repeat for Svalovichi
+- [ ] start for Almaznoe
 
+__Negatives__
+
+- [ ] maybe provide `lens: "manual"` instead of nil`
+
+__Imprint__ prints ledger management by using DSL batch processing
+
+- [ ] design data and events model
+- [ ] design events DSL
+- [ ] design the component interface for querying prints availability for particular images and whole series (:DP2Q1058, :P01013456)
+
+__Expozen__
+
+- [ ] Basic styling for mimicking exposrue; for header, footer, and about
+- [ ] Magick CLI for resizing, making mosaics and collages
+- [ ] import series from Flatplan
+- [ ] port JSs, such as `sw.js`, `Todd Hido mosaic`, and `mobile image-rotator`?
+- [ ] port CSS for mozaic and series collage
+- [ ] fix mozaic thing when 3rd row completely empty
+- [ ] desing `/clearence` page based on Imprint
+- [ ] maybe design `/prints` page based on Imprint
 
 __Flatplan__
 
-- [ ] decompose publication serializer for separate models serialization; provide some configuation of serializes inside that will work for mixing image attributes for exposure site.
-- [ ] maybe extend Kairos by moon cycles?
+- [ ] batch webp convetation for preview
+- [ ] maybe extend Kairos by
+  - [ ] moon cycles?
+  - [ ] day after, day before for astronomcal events
+
+## [v0.2.0] - 2026-07-10
+
+- redesigned config for using `Basic::Configuraton`
+- redesigned `ManifestSerializer` and `PandocManifestSerializer` 
+- upadted `Service::LoadPublicaiton` to suport alternative series manifest name
+- designed new basic layer for CLI (CliCommand, CliRouter)
+- designed new `bin/flatplan init` command (see `bin/flatplan help init`)
+- redesigned `bin/flatplan preview` and now it supporst alternative manifests names
+- started `expozen` prototype for new exposure site
 
 ## 2026-07-09
 

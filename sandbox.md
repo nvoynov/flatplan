@@ -1,18 +1,3 @@
-![Sandstone monolithic ridge under wide steppe sky](DP2Q2173.webp)
-![Weathered rock textures close-up](DP2Q2181.webp)
-![The ancient barrier of stones](DP2Q2192.webp)
-![Massive sandstone blocks overview](DP2Q2200.webp)
-![Muted stone shapes dissolving into heavy fog](DP2Q2918.webp)
-![Ghostly limestone contours inside the white mist](DP0Q0398.webp)
-![Silent sandstone paths under heavy haze](DP0Q0401.webp)
-![Deep mist blanketing the monolithic sanctuary](DP0Q0408.webp)
-![Vanishing silhouettes of ancient monoliths](DP0Q0409.webp)
-![Hand-cut ancient stone millstone in the grass](DP2Q2948.webp)
-![Anthropomorphic stone effigy profile view](DP2Q2953.webp)
-![Faceted rock textures with prehistoric markings](DP2Q2956.webp)
-![Sacral round shapes in weathered sandstone](DP2Q2959.webp)
-![Ancient stone idol watching the horizon](DP2Q2962.webp)
-![Abstract macro texture of a deeply weathered rock surface](DP2Q2977.webp)
-![Fading evening light over the stone blocks](DP0Q0433.webp)
-![The final silent accent of the stone tomb](DP0Q0458.webp)
+отлично, давай пока сосредоточимся на базовом классе команды, назовем его Basic::CliComand, что подчеркнет назначение. Дальше будем работать с этим базовым классом и его наслдеником Init. Когда доведем этот блок до достаточной степени качства, только тогда поработаем над Preview
 
+обнови пожалуйста свои сведения об парсере https://docs.ruby-lang.org/en/3.4/OptionParser.html и https://docs.ruby-lang.org/en/3.4/optparse/tutorial_rdoc.html

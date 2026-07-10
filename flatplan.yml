@@ -1,4 +1,5 @@
 ---
+series_dir: /home/nick/Photo/WebAlbums 
 image_extensions:
 - ".webp"
 - ".jpg"
