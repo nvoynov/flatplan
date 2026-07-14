@@ -11,6 +11,7 @@ module Flatplan
       # @return [String, nil] the Markdown fallback alternate caption
       attr_accessor :caption
 
+      # TODO: arguable attribut name for <alt=""> tag
       # @return [String, nil] individual artistic title curated for this series
       attr_accessor :title
 

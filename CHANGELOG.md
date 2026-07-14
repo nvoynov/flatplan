@@ -31,10 +31,20 @@ __Expozen__
 
 __Flatplan__
 
-- [ ] batch webp convetation for preview
-- [ ] maybe extend Kairos by
-  - [ ] moon cycles?
-  - [ ] day after, day before for astronomcal events
+- [ ] maybe SeriesPuliccation < LayotSection with :media_assets?
+- [ ] update Kairos (replace source and test)
+- [ ] make default adapters initializer
+- [ ] ensure `bin/flaplan init` does not rewrite existing series
+- [ ] make `bin/flatplan update/refresh SERIES` command that will fix manifest by removing images that not exist, and adding new images in new section
+
+##  [v0.2.1] - 2026-07-14
+
+- updated `lib/kairos.rb`, provided test
+- changed `ManifestSerializer` by providing `#serialize_title`
+- changed `PandocManifestSerializing` by using the method above
+- designed `Flatplan.default!` for providing default atapters
+
+TBD: `layout_asset#title` is it the right name?
 
 ## [v0.2.0] - 2026-07-10
 

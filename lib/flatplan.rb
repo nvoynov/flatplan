@@ -12,4 +12,12 @@ require_relative 'flatplan/cli'
 
 # Root domain namespace
 module Flatplan
+  def self.default!
+    container = Struct.new(:file_store, :metadata_store)
+      .new(
+        file_store: FileSystemStoreAdapter.new,
+        metadata_store: NegativesMetadataAdapter.new
+      )
+    Ports::Context.setup(container)
+  end
 end

@@ -4,10 +4,17 @@ require_relative "manifest_serializer"
 
 module Flatplan
   module Presenter
+    # TODO: provide image alt text
+  
+    
     # Translates a domain SeriesPublication object into a highly structured,
     # semantic Pandoc Markdown layout document utilizing dynamic flatplan_ prefixes.
     class PandocManifestSerializer < ManifestSerializer
       protected
+       
+      def serialize_title(pub)
+        "\n# #{pub.title}\n"
+      end
 
       # Formats an isolated, prefixed TextAndMedia semantic container block.
       def render_text_and_media(section)

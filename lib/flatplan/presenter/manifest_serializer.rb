@@ -18,16 +18,25 @@ module Flatplan
 
         # 1. Output Structured YAML Front Matter Metadata Block
         buffer << render_yaml_front_matter(publication)
+        buffer << serialize_title(publication)
 
         # 2. Process layout structures sequentially via polymorphic routing
         publication.sections.each do |section|
           buffer << render_section(section)
         end
 
-        buffer.join("\n")
+        buffer
+          .reject(&:empty?)
+          .join("\n")
       end
 
       protected
+
+      # @param pub [Model::SeriesPublication] target publication record
+      # @return [String] title
+      def serialize_title(pub)
+        ''
+      end
 
       # Generates a unified YAML configuration block for the publication.
       #
@@ -93,9 +102,13 @@ module Flatplan
         buf.join("\n")
       end
 
+      def serialize_image_metadata(asset)
+        ''
+      end
+      
       # Encapsulates uniform serialization logic for an individual image asset.
       def serialize_asset(buffer, asset)
-        buffer << serialize_image_tag(asset)
+        buffer << serialize_image_tag(asset) + serialize_image_metadata(asset)
         buffer << "title: #{asset.title}" if asset.title && !asset.title.empty?
         buffer << "captured_at: #{asset.captured_at}" if asset.captured_at
 

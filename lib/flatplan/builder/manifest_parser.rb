@@ -129,7 +129,9 @@ module Flatplan
           elsif line.start_with?("title:") && last_asset
             last_asset.title = line.split(":", 2).last.strip
           elsif line.start_with?("captured_at:") && last_asset
-            last_asset.captured_at = line.split(":", 2).last.strip.then{ Time.new(it) }
+            # last_asset.captured_at = line.split(":", 2).last.strip.then{ Time.new(it) }
+            last_asset.captured_at = line.split(":", 2).last.strip
+              .then{ Time.new(it) }
           elsif line.start_with?("![") && line.include?("](")
             match = line.match(/!\[(.*?)\]\((.*?)\)/)
             if match

@@ -1,13 +1,7 @@
 #!/usr/bin/env ruby
 
 require './lib/flatplan'
-include Flatplan
 
-container = Struct.new(:file_store, :metadata_store)
-  .new(
-    file_store: FileSystemStoreAdapter.new,
-    metadata_store: NegativesMetadataAdapter.new
-  )
-Ports::Context.setup(container)
+Flatplan.default!
 
-CLI.call 
+Flatplan::CLI.call 

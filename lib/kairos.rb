@@ -74,14 +74,15 @@ module Kairos
   def call(time, *contexts)
     time_of_day = determine_time_of_day(time.hour)
     day_of_week = time.strftime("on %A")
+    year        = time.year
     
-    # Normalize inputs to a flat list of unique symbols, always ensuring :basic is processed
     requested_layers = ([:basic] + contexts.flatten).uniq
 
-    # Generate the result hash by mapping each active context to its formatted string
     requested_layers.each_with_object({}) do |context, result|
       date_context = determine_date_context(time, context)
-      result[context] = "#{time_of_day} #{day_of_week} [focus], #{date_context}"
+      
+      # Clean, branchless logic: always append the year with a clean comma separator
+      result[context] = "#{time_of_day} #{day_of_week} [focus], #{date_context}, #{year}"
     end
   end
 
@@ -99,7 +100,6 @@ module Kairos
     end
   end
 
-  # Dynamically routes the layer request to its dedicated context method
   def determine_date_context(time, layer)
     if ALLOWED_CONTEXTS.include?(layer) && respond_to?(layer, true)
       send(layer, time) || basic(time)
@@ -141,7 +141,7 @@ module Kairos
     end
   end
 
-  def rurual(time) # Fixed typo from previous iteration
+  def rural(time)
     case time.month
     when 4, 5  then "during the spring plowing season"
     when 7, 8  then "during the mid-summer haymaking season"
@@ -149,8 +149,20 @@ module Kairos
     end
   end
 
-  # Default fallback logic used for the :basic layer or when a specific layer yields no match
   def basic(time)
+    base_string = default_seasonal_string(time)
+
+    # If it's dark outside (after 21:00 or before 4:00), append the moon phase
+    if time.hour >= 21 || time.hour < 4
+      "#{base_string} #{calculate_moon_phase(time)}"
+    else
+      base_string
+    end
+  end
+
+  # --- UTILITY METHODS ---
+
+  def default_seasonal_string(time)
     astronomical = ASTRONOMICAL_EVENTS.find { |e| e[:month] == time.month && e[:day] === time.day }
     return astronomical[:name] if astronomical
 
@@ -173,11 +185,53 @@ module Kairos
     "#{period} #{season}"
   end
 
-  # --- UTILITY METHODS ---
-
-  def check_easter(time)
+  def calculate_moon_phase(time)
+    # Reference New Moon date: January 6, 2000
+    ref_date = Date.new(2000, 1, 6)
     current_date = Date.new(time.year, time.month, time.day)
-    easter_sunday = Date.easter(time.year) 
+    
+    # Calculate days passed since reference date
+    days_passed = (current_date - ref_date).to_i
+    
+    # Calculate position in the 29.53059-day lunar cycle (0.0 to 1.0)
+    phase = (days_passed % 29.530588853) / 29.530588853
+
+    # Map the decimal phase into descriptive astronomical terms
+    case phase
+    when 0.03..0.22 then "under a waxing crescent moon"
+    when 0.22..0.28 then "under a first quarter moon"
+    when 0.28..0.47 then "under a waxing gibbous moon"
+    when 0.47..0.53 then "under a radiant full moon"
+    when 0.53..0.72 then "under a waning gibbous moon"
+    when 0.72..0.78 then "under a last quarter moon"
+    when 0.78..0.97 then "under a waning crescent moon"
+    else                 "under a dark new moon"
+    end
+  end
+
+    # Computes the Western (Gregorian) Easter Sunday using the Anonymous Meeus algorithm.
+  # This keeps the module completely independent of third-party gems.
+  def check_easter(time)
+    year = time.year
+    
+    # Meeus/Jones/Butcher Gregorian Easter Algorithm
+    a = year % 19
+    b = year / 100
+    c = year % 100
+    d = b / 4
+    e = b % 4
+    f = (b + 8) / 25
+    g = (b - f + 1) / 3
+    h = (19 * a + b - d - g + 15) % 30 # Fixed: changed /30 to %30
+    i = c / 4
+    k = c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7 # Fixed: changed /7 to %7
+    m = (a + 11 * h + 22 * l) / 451
+    month = (h + l - 7 * m + 114) / 31
+    day = ((h + l - 7 * m + 114) % 31) + 1
+
+    easter_sunday = Date.new(year, month, day)
+    current_date  = Date.new(time.year, time.month, time.day)
     
     if current_date == easter_sunday
       "on Easter Sunday"
