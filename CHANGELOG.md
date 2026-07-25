@@ -12,24 +12,11 @@ __Negatives__
 
 - [ ] maybe provide `lens: "manual"` instead of nil`
 
-__Imprint__ prints ledger management by using DSL batch processing
-
-- [ ] design data and events model
-- [ ] design events DSL
-- [ ] design the component interface for querying prints availability for particular images and whole series (:DP2Q1058, :P01013456)
-
-__Expozen__
-
-- [ ] Basic styling for mimicking exposrue; for header, footer, and about
-- [ ] Magick CLI for resizing, making mosaics and collages
-- [ ] import series from Flatplan
-- [ ] port JSs, such as `sw.js`, `Todd Hido mosaic`, and `mobile image-rotator`?
-- [ ] port CSS for mozaic and series collage
-- [ ] fix mozaic thing when 3rd row completely empty
-- [ ] desing `/clearence` page based on Imprint
-- [ ] maybe design `/prints` page based on Imprint
-
 __Flatplan__
+
+- [ ] make initial publication assetr order by date
+- [ ] add `alt` asset property; maybe provide for Pandoc as `![](img alt="")`
+- [ ] live preview where one edits publication manifest the system compiles new version (ls mafiest.md | entr bin/flatplan compile)
 
 - [ ] fix Kairos for extra keyword hints, that are equal
 - [ ] maybe SeriesPuliccation < LayotSection with :media_assets?
