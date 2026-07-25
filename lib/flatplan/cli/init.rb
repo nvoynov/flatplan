@@ -6,9 +6,11 @@ require_relative "../config"
 
 module Flatplan
   module CLI
+    
     # Dedicated Command Object handling workspace directory setup 
     # and initial publishing manifest seeding.
     class Init < ::Basic::CliCommand
+      
       # One clean declarative macro configures your short command triggers!
       shortcut :i
       summary "Initialize a new series workspace folder and enriched manifest"

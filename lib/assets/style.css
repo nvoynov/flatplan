@@ -1,88 +1,186 @@
-/* lib/assets/style.css — Полностью изолированный издательский CSS Grid каркас */
+/* ==========================================================================
+   PREVIEW SHADOW DOM & CORE RESET
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  color: #111;
-  background-color: #fafafa;
-  line-height: 1.7;
   margin: 0;
-  padding: 6rem 2rem;
+  padding: 0;
+  background-color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-h1 {
-  text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; /* Оставляем гротеск только для технических заголовков */
-  font-weight: 300;
-  letter-spacing: -0.03em;
-  margin-bottom: 6rem;
-  font-size: 2.5rem;
+.content-container {
+  width: 100%;
+  padding: 0 2rem;
 }
 
-/* Базовый контейнер для элементов истории */
+.page-main-body-content {
+  width: 100%;
+}
+
+/* ==========================================================================
+   PREMIUM EDITORIAL HERO HEADER BLOCK (Centered Title, Author, Date, Desc)
+   ========================================================================== */
+.editorial-header-block {
+  max-width: 75rem;
+  margin: 6rem auto 5rem auto;
+  text-align: center;
+}
+
+/* Elegant uppercase title matching your layout specs */
+.editorial-header-block h1 {
+  font-size: 1.1rem !important;       
+  font-weight: 300 !important;       
+  letter-spacing: 0.18em !important; 
+  text-transform: uppercase !important; 
+  color: #1a1a1a !important;
+  margin: 0 0 0.8rem 0 !important;
+}
+
+/* Meta text formatting: Author & Date */
+.editorial-meta-author {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #777777;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.editorial-meta-date {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #999999;
+  letter-spacing: 0.05em;
+  margin-bottom: 2.2rem;
+}
+
+/* Italicized description block acting as entry point to the series */
+.editorial-description {
+  max-width: 38rem;
+  margin: 0 auto;
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555555;
+  font-weight: 300;
+}
+
+/* ==========================================================================
+   THE FINAL PRODUCTION CSS GRID FRAMEWORK (FLATPLAN SYSTEM)
+   ========================================================================== */
+
+/* Base container for story layout sections */
 .flatplan_section, .flatplan_visual_pause, .flatplan_editorial_hero {
-  max-width: 1200px;
+  max-width: 75rem;
   margin: 0 auto 10rem auto;
 }
 
-/* Текст слева: колонка текста (1fr) и широкая колонка для сетки фото (2fr) */
+/* Left layout: text on the left (1/3), media grid on the right (2/3) */
 .flatplan_layout_left_text {
   display: grid;
   grid-template-columns: 1.1fr 2fr;
   gap: 5rem;
   align-items: start;
+  grid-template-areas: "story media";
 }
 
-/* Текст справа: инвертированная сетка */
+.flatplan_layout_left_text .flatplan_story_text { grid-area: story; }
+.flatplan_layout_left_text .flatplan_media_grid { grid-area: media; }
+
+/* Right layout: explicitly places media on the left (2/3) and text on the right (1/3) */
 .flatplan_layout_right_text {
   display: grid;
   grid-template-columns: 2fr 1.1fr;
   gap: 5rem;
   align-items: start;
+  grid-template-areas: "media story"; 
 }
 
-/* Внутренние стили для колонки с кураторскими абзацами */
+.flatplan_layout_right_text .flatplan_story_text { grid-area: story; }
+.flatplan_layout_right_text .flatplan_media_grid { grid-area: media; }
+
+/* --- THE ARTISTIC NARRATIVE TYPOGRAPHY --- */
 .flatplan_story_text p {
   margin-top: 0;
-  margin-bottom: 1.8rem;
-  font-size: 1.15rem;
+  margin-bottom: 1.375rem;          
+  font-size: 0.95rem !important;    
+  line-height: 1.8 !important;      
+  color: #2c2c2c !important;        
+  text-align: left !important;
+  font-weight: 300;
 }
 
-/* Автоматическая сетка для фотографий */
+/* --- THE MEDIA GRIDS & HERO SHOWCASE --- */
+
+/* Standard 2-column pack for inline content alongside story texts */
 .flatplan_media_grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr); 
   gap: 2.5rem;
 }
 
-/* Позволяет картинкам игнорировать дефолтные <p> от Pandoc и вставать ровно в Grid */
-.flatplan_media_grid p, .flatplan_visual_pause p {
+/* Editorial Hero Showcase: strictly enforces uniform physical scaling via 3 columns */
+.flatplan_editorial_hero .flatplan_media_grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem; 
+}
+
+/* Unwraps implicit Pandoc <p> tags across all components for correct raw block parsing */
+.flatplan_media_grid p, .flatplan_visual_pause p, .flatplan_editorial_hero p {
   display: contents; 
 }
 
-/* Стилизация самих фотографий */
+/* Global photography assets specifications */
 .flatplan_media_grid img, .flatplan_editorial_hero img {
   width: 100%;
   height: auto;
   display: block;
+  object-fit: cover; 
   border: 1px solid rgba(0,0,0,0.02);
 }
 
-/* Блок чистой визуальной паузы */
+/* Large pure visual pause break section footprint */
 .flatplan_visual_pause.flatplan_spacing_large {
   margin-top: 16rem;
   margin-bottom: 16rem;
 }
 
-/* Блок монументального акцента Hero */
-.flatplan_editorial_hero img {
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-/* Адаптивность для мобильных телефонов */
+/* ==========================================================================
+   PRODUCTION RESPONSIVE MOBILE DOWNGRADE BREAKPOINTS
+   ========================================================================== */
 @media (max-width: 900px) {
+  .editorial-header-block {
+    margin: 4rem auto 3rem auto;
+  }
+  
+  .editorial-description {
+    padding: 0 1rem;
+  }
+  
   .flatplan_layout_left_text, .flatplan_layout_right_text {
     grid-template-columns: 1fr;
     gap: 3rem;
+    grid-template-areas: 
+      "story"
+      "media";
+  }
+
+  .flatplan_layout_right_text {
+    grid-template-areas: 
+      "story"
+      "media";
+  }
+
+  .flatplan_media_grid, .flatplan_editorial_hero .flatplan_media_grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .flatplan_story_text p {
+    padding: 0 0.625rem;
   }
 }

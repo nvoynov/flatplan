@@ -102,9 +102,9 @@ module Flatplan
 
       # Core execution routine for browser interactive engine compilation pipeline.
       def preview_in_browser(series_dir, manifest_name, config)
-        # assets_dir = File.expand_path("../assets", __dir__).freeze
         assets_dir = File.join(Dir.pwd, 'lib', 'assets')
         css_path = File.join(assets_dir, "style.css")
+        template = File.join(assets_dir, "preview.html")
 
         publication = Service::LoadPublication.call(
           directory_path: series_dir,
@@ -121,6 +121,7 @@ module Flatplan
         FileUtils.mkdir_p(tmp_dir)
         puts "==> Establishing local pipeline workspace: #{tmp_dir}"
         FileUtils.cp(css_path, tmp_dir)
+        FileUtils.cp(template, tmp_dir)
 
         begin
           magick_cli = MagickCli.new
@@ -141,7 +142,8 @@ module Flatplan
           
           PandocCli.new.compile(
             source: "pandoc_manifest.md", 
-            stylesheet: "style.css",
+            template: template,
+            # stylesheet: "style.css",
             destination: "index.html", 
             workspace: tmp_dir
           )

@@ -14,16 +14,19 @@ __Negatives__
 
 __Flatplan__
 
-- [ ] make initial publication assetr order by date
-- [ ] add `alt` asset property; maybe provide for Pandoc as `![](img alt="")`
 - [ ] live preview where one edits publication manifest the system compiles new version (ls mafiest.md | entr bin/flatplan compile)
-
-- [ ] fix Kairos for extra keyword hints, that are equal
-- [ ] maybe SeriesPuliccation < LayotSection with :media_assets?
-- [ ] update Kairos (replace source and test)
 - [ ] make default adapters initializer
 - [ ] ensure `bin/flaplan init` does not rewrite existing series
 - [ ] make `bin/flatplan update/refresh SERIES` command that will fix manifest by removing images that not exist, and adding new images in new section
+
+##  [v0.2.1] - 2026-07-25
+
+- fixed css for `text: right media: left` and for `hero`
+- provided template for preview
+- added `media_asset#alt` attribute
+- optimized kairos hint to be unique
+- fixed initial publication assets ordered defalt "by date"
+- added `doc/feature-request-visual-storyboard.md`!
 
 ##  [v0.2.1] - 2026-07-14
 

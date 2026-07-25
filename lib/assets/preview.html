@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$title$ — Preview</title>
+  
+  <style>
+    /* ==========================================================================
+       1. CORE RESET & BASE EDITORIAL TYPOGRAPHY
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .content-container {
+      width: 100%;
+      padding: 0 2rem;
+    }
+
+    .page-main-body-content {
+      width: 100%;
+    }
+
+    /* ==========================================================================
+       2. RECONFIGURED HEADER BLOCK (Fixes Header Duplication)
+       ========================================================================== */
+    .editorial-header-block {
+      max-width: 75rem;
+      margin: 6rem auto 5rem auto;
+      text-align: center;
+    }
+
+    /* We hide Pandoc's auto-generated H1 inside body to prevent duplication with meta-title */
+    .page-main-body-content > h1:first-of-type {
+      display: none !important;
+    }
+
+    .editorial-header-block h1 {
+      font-size: 1.65rem !important;      /* Increased by 1.5x from baseline 1.1rem */
+      font-weight: 300 !important;       
+      letter-spacing: 0.18em !important; 
+      text-transform: uppercase !important; 
+      color: #1a1a1a !important;
+      margin: 0 0 0.8rem 0 !important;
+    }
+
+    .editorial-meta-author {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #777777;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .editorial-meta-date {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: #999999;
+      letter-spacing: 0.05em;
+      margin-bottom: 2.2rem;
+    }
+
+    .editorial-description {
+      max-width: 38rem;
+      margin: 0 auto;
+      font-style: italic;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #555555;
+      font-weight: 300;
+    }
+
+    /* ==========================================================================
+       3. EMBEDDED PRODUCTION FLATPLAN CSS GRID FRAMEWORK
+       ========================================================================== */
+    
+    .flatplan_section, .flatplan_visual_pause, .flatplan_editorial_hero {
+      max-width: 75rem;
+      margin: 0 auto 10rem auto;
+    }
+
+    .flatplan_layout_left_text {
+      display: grid;
+      grid-template-columns: 1.1fr 2fr;
+      gap: 5rem;
+      align-items: start;
+      grid-template-areas: "story media";
+    }
+
+    .flatplan_layout_left_text .flatplan_story_text { grid-area: story; }
+    .flatplan_layout_left_text .flatplan_media_grid { grid-area: media; }
+
+    .flatplan_layout_right_text {
+      display: grid;
+      grid-template-columns: 2fr 1.1fr;
+      gap: 5rem;
+      align-items: start;
+      grid-template-areas: "media story"; 
+    }
+
+    .flatplan_layout_right_text .flatplan_story_text { grid-area: story; }
+    .flatplan_layout_right_text .flatplan_media_grid { grid-area: media; }
+
+    .flatplan_story_text p {
+      margin-top: 0;
+      margin-bottom: 1.375rem;          
+      font-size: 0.95rem !important;    
+      line-height: 1.8 !important;      
+      color: #2c2c2c !important;        
+      text-align: left !important;
+    }
+
+    .flatplan_media_grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 2.5rem;
+    }
+
+    .flatplan_editorial_hero .flatplan_media_grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem; 
+    }
+
+    .flatplan_media_grid p, .flatplan_visual_pause p, .flatplan_editorial_hero p {
+      display: contents; 
+    }
+
+    .flatplan_media_grid img, .flatplan_editorial_hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover; 
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .flatplan_visual_pause.flatplan_spacing_large {
+      margin-top: 16rem;
+      margin-bottom: 16rem;
+    }
+
+    /* ==========================================================================
+       4. RESPONSIVE MOBILE DOWNGRADE BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .editorial-header-block {
+        margin: 4rem auto 3rem auto;
+      }
+      
+      .editorial-description {
+        padding: 0 1rem;
+      }
+      
+      .flatplan_layout_left_text, .flatplan_layout_right_text {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        grid-template-areas: 
+          "story"
+          "media";
+      }
+
+      .flatplan_layout_right_text {
+        grid-template-areas: 
+          "story"
+          "media";
+      }
+
+      .flatplan_media_grid, .flatplan_editorial_hero .flatplan_media_grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .flatplan_story_text p {
+        padding: 0 0.625rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="content-container">
+    <div class="page-main-body-content">
+      
+      <!-- The Curated Centerpiece Editorial Header Area -->
+      <header class="editorial-header-block">
+        <h1>$title$</h1>
+        <div class="editorial-meta-author">$author$</div>
+        <div class="editorial-meta-date">$date$</div>
+        <div class="editorial-description">$description$</div>
+      </header>
+
+      <!-- Pandoc Native Dynamic HTML Content Injection Channel -->
+      $body$
+
+    </div>
+  </main>
+
+</body>
+</html>

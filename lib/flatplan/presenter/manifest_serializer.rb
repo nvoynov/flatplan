@@ -114,17 +114,18 @@ module Flatplan
       # Encapsulates uniform serialization logic for an individual image asset.
       def serialize_asset(buffer, asset)
         buffer << serialize_image_tag(asset) + serialize_image_metadata(asset)
-        buffer << "title: #{asset.title}" if asset.title && !asset.title.empty?
-        buffer << "captured_at: #{asset.captured_at}" if asset.captured_at
+        buffer << "alt: #{asset.alt}"
+        buffer << "caption: #{asset.caption}"
+        buffer << "title: #{asset.title}"
+        buffer << "captured_at: #{asset.captured_at}"
 
         # Embed Kairos hints dynamically upon target criteria validation
-        if asset.captured_at && (!asset.title || asset.title.empty?)
-          Kairos
-            .call(asset.captured_at, @publication.keywords)
-            .map { |k, v| "kairos_#{k}_hint: #{v}" }
-            .each { |hint| buffer << hint }
-        end
-        
+        Kairos
+          .call(asset.captured_at, @publication.keywords)
+          .tap { it[:basic] = it.delete(:basic) } # :basic to the end
+          .invert.invert                          # unique phrases left
+          .each{|k,v| buffer << "kairos_#{k}: #{v}" }
+
         buffer << ""
       end
 
@@ -134,7 +135,7 @@ module Flatplan
       # @param asset [Model::LayoutAsset] targeting media asset
       # @return [String] formatted standard image markdown token
       def serialize_image_tag(asset)
-        "!\[#{asset.caption}\]\(#{asset.filename}\)"
+        "![](#{asset.filename}\)"
       end
     end
   end

@@ -23,8 +23,8 @@ module Dummy
   end
 
   # @return [Array<String>]
-  def asset_titles
-    @asset_titles ||= begin
+  def asset_alts
+    @asset_alts ||= begin
       words = String.new(LOREM_IPSUM).split
       
       # Collect exactly matching elements for titles mapping
@@ -48,8 +48,9 @@ module Dummy
       .map.with_index do |e, index|
         Flatplan::Model::LayoutAsset.new(
           filename: e,
+          alt: asset_alts[index],
           caption: "Fallback caption",
-          title: asset_titles[index],
+          title: "Fallback title",
           captured_at: mktime
         )
       end

@@ -5,6 +5,7 @@ require_relative "base"
 
 module Flatplan
   module Builder
+    
     # Parses raw Flatplan Markdown manifest strings into validated
     # Model::SeriesPublication domain entity aggregates based on header tracking.
     class ManifestParser < Base
@@ -126,10 +127,13 @@ module Flatplan
           elsif line.match?(/^(text|media|spacing|layout):/)
             key, val = line.split(":", 2).map(&:strip)
             metadata[key.to_sym] = val.to_sym
+          elsif line.start_with?("alt:") && last_asset
+            last_asset.alt = line.split(":", 2).last.strip
+          elsif line.start_with?("caption:") && last_asset
+            last_asset.caption = line.split(":", 2).last.strip
           elsif line.start_with?("title:") && last_asset
             last_asset.title = line.split(":", 2).last.strip
           elsif line.start_with?("captured_at:") && last_asset
-            # last_asset.captured_at = line.split(":", 2).last.strip.then{ Time.new(it) }
             last_asset.captured_at = line.split(":", 2).last.strip
               .then{ Time.new(it) }
           elsif line.start_with?("![") && line.include?("](")

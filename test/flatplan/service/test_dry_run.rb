@@ -7,6 +7,7 @@ describe 'Manifest Serialize/Load dry-run' do
       content = Presenter::ManifestSerializer.call(origin)
       parsed  = Builder::ManifestParser.call(content:)
       assert_equal origin, parsed      
+      Presenter::PandocManifestSerializer.call(parsed)
     end
   end
 

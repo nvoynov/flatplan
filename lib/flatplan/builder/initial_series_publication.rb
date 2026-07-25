@@ -36,18 +36,16 @@ module Flatplan
           file_key = File.basename(filename, ".*")
           match = metadata[file_key] || {}
           captured_at = match['captured_at']
-          captured_at = captured_at ? Time.new(captured_at) : Time.now 
+          captured_at = captured_at ? Time.new(captured_at) : File.mtime(filename) 
          
           Model::LayoutAsset.new(
             filename: filename,
-            caption: "Fallback caption",
-            title: match['title'] || '',
             captured_at: captured_at
           )          
         end
           
         initial_section = Model::TextAndMediaSection.new(
-          media_assets: assets,
+          media_assets: assets.sort_by(&:captured_at),
           paragraphs: paragraphs
         )
 

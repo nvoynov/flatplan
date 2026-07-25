@@ -8,8 +8,7 @@ image_extensions:
 - ".tif"
 - ".tiff"
 series_manifest_name: SERIES.md
-author: Unknown Author
+author: Nikolay Voynov
 default_keywords:
-- fine-art
 - photography
 - documentary

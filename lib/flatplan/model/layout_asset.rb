@@ -8,10 +8,12 @@ module Flatplan
       # @return [String] the unique filename or relative path of the asset
       attr_accessor :filename
 
-      # @return [String, nil] the Markdown fallback alternate caption
+      # @return [String, nil] atlernative text
+      attr_accessor :alt
+      
+      # @return [String, nil] alternate caption
       attr_accessor :caption
-
-      # TODO: arguable attribut name for <alt=""> tag
+      
       # @return [String, nil] individual artistic title curated for this series
       attr_accessor :title
 
@@ -34,6 +36,7 @@ module Flatplan
       # @param height [Integer, nil] source image height
       def initialize(
         filename:, 
+        alt: nil,
         caption: nil, 
         title: nil, 
         captured_at: nil, 
@@ -42,6 +45,7 @@ module Flatplan
       )
         super()
         @filename = filename
+        @alt = alt || ''
         @caption = caption || ''
         @title = title || ''
         @captured_at = captured_at
