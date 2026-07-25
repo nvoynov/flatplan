@@ -19,7 +19,7 @@ __Flatplan__
 - [ ] ensure `bin/flaplan init` does not rewrite existing series
 - [ ] make `bin/flatplan update/refresh SERIES` command that will fix manifest by removing images that not exist, and adding new images in new section
 
-##  [v0.2.1] - 2026-07-25
+##  [v0.2.2] - 2026-07-25
 
 - fixed css for `text: right media: left` and for `hero`
 - provided template for preview
