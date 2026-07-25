@@ -31,6 +31,7 @@ __Expozen__
 
 __Flatplan__
 
+- [ ] fix Kairos for extra keyword hints, that are equal
 - [ ] maybe SeriesPuliccation < LayotSection with :media_assets?
 - [ ] update Kairos (replace source and test)
 - [ ] make default adapters initializer

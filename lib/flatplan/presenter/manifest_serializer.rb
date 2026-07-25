@@ -5,6 +5,11 @@ require_relative "base"
 
 module Flatplan
   module Presenter
+
+    #
+    # TODO: REFACTOR IT FOR SECTION RENDERERS!
+    #       current design is a speed with design quality compromize
+    # 
     # Symmetrically serializes a domain SeriesPublication entity back into 
     # a clean, human-readable Flatplan Markdown publishing manifest file.
     class ManifestSerializer < Base
