@@ -1,9 +1,9 @@
 # handful work artifacts
-./sandbox.*
+/sandbox.*
 
 # --- private data and configuration
-./data/*
-./*.yml
+/data/*
+/*.yml
 
 # --- OS specific metadata exclusions ---
 .DS_Store

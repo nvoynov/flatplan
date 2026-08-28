@@ -37,6 +37,21 @@ __Flatplan__
 - [ ] ensure `bin/flaplan init` does not rewrite existing series
 - [ ] make `bin/flatplan update/refresh SERIES` command that will fix manifest by removing images that not exist, and adding new images in new section
 
+
+- [] new `bin/flatplan init` creates new manifest and open Designer (no need to for `preview` command - designer will fit)
+- [] new BuildPandocWeb that creates Pandoc Markdown page for html compilation
+
+
+## 2026-08-27
+
+- designed brand new Core layer of Text, Media, VisualPause, MeidaAssets, TextAndMedia, Story content elemetns; equipped with Factory, StoryInitializer, StoryBuilder, StorySerializer!
+- designed Media::Web and Media::Book Core platrorms
+- Media::Web is ready to replace original Model ... still require PandocPresenter
+- Media::Book is caable to build complex book (see tets/flatplan/test_helper.rb)
+
+ with Factory, 
+
+
 ##  [v0.2.1] - 2026-07-14
 
 - updated `lib/kairos.rb`, provided test
