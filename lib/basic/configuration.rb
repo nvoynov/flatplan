@@ -41,10 +41,33 @@ module Basic
 
     private
 
-    def file_path
-      @file_path ||= File.join(Dir.pwd, self.class.target_file)
-    end      
+    def target_file = self.class.target_file
 
+    # def file_path
+    #   @file_path ||= File.join(Dir.pwd, target_file)
+    # end
+          
+    # Climbs up the directory tree starting from the current directory (Dir.pwd)
+    # until it finds a .flatplan.yml file or hits the root/home boundary.
+    # @return [String, nil] fullpath to configuration file on nil
+    def find_hierarchical_config
+      current = Pathname.new(Dir.pwd)
+      home    = Pathname.new(Dir.home)
+
+      # Climb up the tree
+      loop do
+        config_path = current.join(target_file)
+        return config_path if config_path.exist?
+
+        # Stop if we reached the root directory or crossed the home directory path
+        break if current.root? || current == home
+
+        current = current.parent
+      end
+      
+      home.join(target_file)
+    end
+    
     # Evaluates disk presence, parses YAML metrics, or triggers fail-safe recovery.
     # @return [Object] frozen state token instance of the declared Data class
     def load_or_create
@@ -54,6 +77,7 @@ module Basic
       # by invoking the Data constructor with zero keywords arguments
       pristine_default = target_class.new
 
+      file_path = find_hierarchical_config 
       if File.exist?(file_path)
         begin
           parsed = YAML.load_file(file_path) || {}
@@ -75,8 +99,8 @@ module Basic
         payload = pristine_default.to_h.transform_keys(&:to_s)
         File.write(file_path, YAML.dump(payload))
         # pristine_default
-        puts "Created default configuraton #{self.class.target_file}"
-        puts "Provide required params then repeat the task"
+        puts "Created default configuraton #{file_path}"
+        puts "Configure first then repeat the task"
         exit
       end
     end

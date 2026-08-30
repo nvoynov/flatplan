@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../lib/flatplan/core'
-require_relative '../../../lib/flatplan/medium'
+require_relative '../../../lib/flatplan'
 
 # Object Mother pattern implementation for Flatplan Core entities.
 # Provides pre-validated, high-quality test data graph structures

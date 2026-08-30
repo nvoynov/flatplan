@@ -12,6 +12,9 @@ module Flatplan
       # @return [String] the file path or URI to the original media file
       attr_reader :filepath
 
+      # @return [Time]
+      attr_reader :captured_at
+      
       # @return [String, nil] the visible caption or title of the artwork
       attr_reader :caption
 
@@ -26,17 +29,19 @@ module Flatplan
 
       # Initializes the core content attributes for a single media asset.
       # @param filepath [String] the file path or URI
+      # @param captured_at [Time]
       # @param caption [String, nil] the visible description of the image
       # @param alt [String, nil] the accessibility description
       # @param width [Integer, nil] the intrinsic width
       # @param height [Integer, nil] the intrinsic height
-      def initialize(filepath, caption: nil, alt: nil, width: nil, height: nil, **kwargs)
+      def initialize(filepath, captured_at: nil, caption: nil, alt: nil, width: nil, height: nil, **kwargs)
         @filepath = filepath
-        @caption  = caption
-        @alt      = alt
+        @captured_at = captured_at
+        @caption  = caption || ''
+        @alt      = alt || ''
         @width    = width
         @height   = height
-        super(**kwargs)
+        super(**kwargs.merge(captured_at:))
       end
     end
   end

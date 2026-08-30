@@ -28,9 +28,9 @@ module Flatplan
         # @param height [Integer, nil] the intrinsic height in pixels
         # @param size [Symbol] the layout size relative to the page grid (:standard, :large)
         # @return [Flatplan::Medium::Web::Media]
-        def media(filepath, caption: nil, alt: nil, width: nil, height: nil, size: :standard)
+        def media(filepath, captured_at: nil, caption: nil, alt: nil, width: nil, height: nil, size: :standard)
           Flatplan::Medium::Web::Media
-            .new(filepath, caption:, alt:, width:, height:, size:)
+            .new(filepath, captured_at:, caption:, alt:, width:, height:, size:)
         end
 
         # Constructs a Web grid collection of media assets.
@@ -64,9 +64,9 @@ module Flatplan
         # @param date [Object, nil] publication timestamp
         # @param elements [Array<Object>] list of web layout components
         # @return [Flatplan::Medium::Web::Page]
-        def story(title, author:, slug: nil, description: nil, date: nil, elements: [])
+        def story(title, author:, slug: nil, description: nil, keywords: [], date: nil, elements: [])
           Flatplan::Medium::Web::Page
-            .new(title, author:, slug:, description:, date:, elements:)
+            .new(title, author:, slug:, description:, keywords:, date:, elements:)
         end
       end
     end

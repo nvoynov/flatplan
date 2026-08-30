@@ -5,6 +5,7 @@ require_relative '../../core'
 module Flatplan
   module Medium
     module Web
+
       # Concrete Web builder strategy.
       # It inherits the flat manifest parsing engine from Core and implements
       # property translation rules specific to Web layout elements.

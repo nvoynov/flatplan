@@ -27,12 +27,14 @@ module Flatplan
       # @param title [String] the title of the story
       # @param author [String] the name of the author
       # @param description [String, nil] a short intro or description
+      # @param keywords [Array<Strihg>]
       # @param date [Object, nil] the publication date
       # @param elements [Array<Object>] initial content blocks
-      def initialize(title, author:, description: nil, date: nil, elements: [], **kwargs)
+      def initialize(title, author:, description: nil, keywords: [], date: nil, elements: [], **kwargs)
         @title       = title
         @author      = author
         @description = description
+        @keyowrds    = keywords
         @date        = date
         @elements    = elements
         super(**kwargs)

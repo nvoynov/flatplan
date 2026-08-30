@@ -19,7 +19,7 @@ module Flatplan
       # @param filenames [Array<String>] list of discovered image files
       # @param raw_text [String, nil] introductory text block or description
       # @param metadata [Hash] dictionary of image properties (EXIF, dimension, titles)
-      # @return [Object] a medium-specific story container (e.g., Flatplan::Web::Page)
+      # @return [Story] a medium-specific story container (e.g., Flatplan::Web::Page)
       # @raise [ArgumentError] if the title is blank or empty
       def call(title:, author:, filenames: [], raw_text: nil, metadata: {})
         raise ArgumentError, "Publication title cannot be blank" \

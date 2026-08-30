@@ -1,6 +1,10 @@
 require_relative '../test_helper'
-require 'flatplan'
+require_relative 'support/mother_core'
 include Flatplan
+
+def fake_config(stories_dir = Dir.pwd)
+  ConfigData.new.with(stories_dir:)
+end
 
 BOOK_MANIFEST = <<~MARKDOWN.strip
   ---

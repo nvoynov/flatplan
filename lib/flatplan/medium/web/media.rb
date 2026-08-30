@@ -15,13 +15,14 @@ module Flatplan
 
         # Initializes a minimalist web media block.
         # @param filepath [String] the file path or URI to the original media file
+        # @param captured_at [Time]
         # @param caption [String, nil] the visible description of the image
         # @param alt [String, nil] the accessibility description
         # @param width [Integer, nil] the intrinsic width
         # @param height [Integer, nil] the intrinsic height
         # @param size [Symbol] the layout size relative to the page grid
-        def initialize(filepath, caption: nil, alt: nil, width: nil, height: nil, size: :standard)
-          super(filepath, caption:, alt:, width:, height:, size:)
+        def initialize(filepath, captured_at: nil, caption: nil, alt: nil, width: nil, height: nil, size: :standard)
+          super(filepath, captured_at:, caption:, alt:, width:, height:, size:)
           @size = size
         end
       end

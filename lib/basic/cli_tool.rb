@@ -28,11 +28,14 @@ module Basic
       raise "No executable command declared for #{self.class}" unless command
 
       # Crossplatform check verifying if the binary target is executable
-      unless system("command -v #{command} >/dev/null 2>&1")
-        raise RuntimeError, "CLI dependency [#{command}] is missing in this OS!"
-      end
+      raise "CLI dependency [#{command}] is missing in this OS!" \
+        unless system("command -v #{command} >/dev/null 2>&1")
     end
 
+    def call(...)
+      execute_command(...)
+    end
+    
     protected
 
     # Executes the pre-registered shell binary securely via Open3 mechanics.

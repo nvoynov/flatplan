@@ -20,8 +20,8 @@ module Flatplan
         # @param description [String, nil] a short intro or description
         # @param date [Object, nil] the publication date
         # @param elements [Array<Object>] initial content blocks for the web view
-        def initialize(title, author:, slug: nil, description: nil, date: nil, elements: [])
-          super(title, author:, description:, date:, elements:)
+        def initialize(title, author:, slug: nil, description: nil, keywords: nil, date: nil, elements: [])
+          super(title, author:, description:, keywords:, date:, elements:)
           @slug = slug || generate_slug(title)
         end
 

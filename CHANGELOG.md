@@ -42,15 +42,18 @@ __Flatplan__
 - [] new BuildPandocWeb that creates Pandoc Markdown page for html compilation
 
 
+## 2026-08-30
+
+- changed configuration data for assets_dir, stories_dir; now configuration file searched form Dir.pwd to the user home
+- stories manifests initialized insdie stories_dir
+- bin/flatplan supports symlinks
+
 ## 2026-08-27
 
 - designed brand new Core layer of Text, Media, VisualPause, MeidaAssets, TextAndMedia, Story content elemetns; equipped with Factory, StoryInitializer, StoryBuilder, StorySerializer!
 - designed Media::Web and Media::Book Core platrorms
-- Media::Web is ready to replace original Model ... still require PandocPresenter
-- Media::Book is caable to build complex book (see tets/flatplan/test_helper.rb)
-
- with Factory, 
-
+- Media::Web is ready to replace original Model
+- Media::Book is capable to build complex book (see tets/flatplan/test_helper.rb)
 
 ##  [v0.2.1] - 2026-07-14
 

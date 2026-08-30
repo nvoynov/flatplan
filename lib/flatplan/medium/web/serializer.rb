@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../core'
+require_relative '../../../kairos'
 
 module Flatplan
   module Medium
@@ -32,18 +33,16 @@ module Flatplan
 
         private
 
-        # TODO: give Kairos hints properly
         def serialize_media_asset(media)
           buffer = []
           
           buffer << "title: #{media.title}" if media.respond_to?(:title) && media.title && !media.title.empty?
+          buffer << "alt: #{media.alt}" unless media.alt.empty?
           
           if media.respond_to?(:captured_at) && media.captured_at
             buffer << "captured_at: #{media.captured_at}"
             
-            # Логика Kairos: если тайтла нет, генерируем подсказки
             if !media.respond_to?(:title) || media.title.nil? || media.title.empty?
-              # Безопасно достаем ключевые слова публикации (если они есть в твоей модели Page)
               keywords = @current_page.respond_to?(:keywords) ? @current_page.keywords : []
               
               Kairos.call(media.captured_at, keywords).each do |key, value|
@@ -52,7 +51,7 @@ module Flatplan
             end
           end
           
-          buffer
+          buffer << ''
         end
       end
     end
