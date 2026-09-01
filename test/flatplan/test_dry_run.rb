@@ -18,7 +18,7 @@ describe 'Flatplan Publication Lifecycle' do
   describe 'Web medium architecture' do
     it 'performs a perfect round-trip serialization and parsing' do
       web_factory     = Flatplan::Medium::Web::Factory.new
-      web_initializer = Flatplan::Core::StoryInitializer.new(web_factory)
+      web_initializer = Flatplan::Core::Initializer.new(web_factory)
 
       # 1. Создаем оригинальный Web-объект
       web_page = web_initializer.call(
@@ -59,7 +59,7 @@ describe 'Flatplan Publication Lifecycle' do
 
     it 'compiles flat print manifest into spatial layout spreads' do
       book_factory     = Flatplan::Medium::Book::Factory.new
-      book_initializer = Flatplan::Core::StoryInitializer.new(book_factory)
+      book_initializer = Flatplan::Core::Initializer.new(book_factory)
 
       # 1. Создаем оригинальный объект Книги (Volume)
       # В реальной жизни свойства презентации здесь будут настроены под печать

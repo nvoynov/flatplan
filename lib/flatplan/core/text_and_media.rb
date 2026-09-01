@@ -14,6 +14,7 @@ module Flatplan
     class TextAndMedia < Base
       extend Forwardable
       def_delegator :@media_assets, :assets
+      def_delegator :@text, :body, :text_content
 
       # @return [Text]
       attr_reader :text

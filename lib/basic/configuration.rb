@@ -1,6 +1,7 @@
 require "yaml"
 require "singleton"
 require "forwardable"
+require "fileutils"
 
 module Basic
   # Abstract base class that automates lazy loading, default file generation,
@@ -39,14 +40,17 @@ module Basic
       @data = load_or_create
     end
 
+    def cache_dir
+      @cache_dir ||= 
+        # File.join(XDGSpec.cache_dir, File.basename(target_file, '.*'))
+        File.join(stories_dir, '.cache')
+          .tap{ FileUtils.mkdir_p it }
+    end
+    
     private
 
     def target_file = self.class.target_file
 
-    # def file_path
-    #   @file_path ||= File.join(Dir.pwd, target_file)
-    # end
-          
     # Climbs up the directory tree starting from the current directory (Dir.pwd)
     # until it finds a .flatplan.yml file or hits the root/home boundary.
     # @return [String, nil] fullpath to configuration file on nil

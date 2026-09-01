@@ -6,7 +6,7 @@ module Flatplan
     # A reusable, medium-agnostic orchestrator that takes raw assets and metadata,
     # processes them into standard primitives, and utilizes a provided factory
     # to compile a structured, initial domain model.
-    class StoryInitializer
+    class Initializer
       # @param factory [Factory] a concrete medium factory
       def initialize(factory)
         @factory = factory

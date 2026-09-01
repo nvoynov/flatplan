@@ -42,6 +42,17 @@ __Flatplan__
 - [] new BuildPandocWeb that creates Pandoc Markdown page for html compilation
 
 
+## 2026-09-01
+
+- removed Story prefix for Builder, Serializer, Initializer
+- moved PandocPresenter as Flatplan::Medium::Web::Presenter
+
+## 2026-08-31
+
+- added `Story#all_media_assets`
+- added `flatplan init`
+- added `flatplan preview`
+
 ## 2026-08-30
 
 - changed configuration data for assets_dir, stories_dir; now configuration file searched form Dir.pwd to the user home

@@ -5,6 +5,7 @@ require_relative 'basic/alias_members'
 require_relative 'basic/cli_tool'
 require_relative 'basic/cli_command'
 require_relative 'basic/cli_router'
+require_relative 'basic/xdg_spec'
 
 module Basic
 

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flatplan Designer — <%= @story_name %></title>
+  <style>
+    body {
+      margin: 0; padding: 0; display: flex;
+      height: 100vh; font-family: sans-serif;
+      background: #111; color: #fff; overflow: hidden;
+    }
+    #control_plane {
+      width: 40%; height: 100%; display: flex; flex-direction: column;
+      border-right: 2px solid #222; box-sizing: border-box;
+    }
+    #editor_header {
+      padding: 10px; background: #1a1a1a; display: flex; 
+      justify-content: space-between; align-items: center;
+      font-size: 0.9rem; color: #888;
+    }
+    #editor {
+      flex: 1; width: 100%; background: #151515; color: #aaa;
+      font-family: monospace; font-size: 14px; line-height: 1.5;
+      padding: 20px; border: none; resize: none; outline: none;
+      box-sizing: border-box;
+    }
+    #preview_plane {
+      width: 60%; height: 100%; border: none; background: #000;
+    }
+    .btn_save {
+      background: #333; color: #fff; border: none; padding: 5px 15px;
+      cursor: pointer; font-weight: bold; border-radius: 3px;
+    }
+    .btn_save:hover { background: #444; }
+  </style>
+</head>
+<body>
+
+  <!-- Левая панель: Управление и текст -->
+  <div id="control_plane">
+    <div id="editor_header">
+      <span>Manifest: <%= @story_name %>.md</span>
+      <button class="btn_save" id="save_btn">Save (Ctrl+S)</button>
+    </div>
+    <textarea id="editor" autocomplete="off" spellcheck="false"><%= @manifest_content %></textarea>
+  </div>
+
+  <!-- Правая панель: iframe с живым превью -->
+  <iframe id="preview_plane" src="/preview/<%= @story_name %>"></iframe>
+
+<script>
+  const editor = document.getElementById('editor');
+  const previewFrame = document.getElementById('preview_plane');
+  const saveBtn = document.getElementById('save_btn');
+  let debounceTimer;
+
+  // 1. РЕАКТИВНОЕ ОБНОВЛЕНИЕ ПРЕВЬЮ (Debounce)
+  editor.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      fetch('/api/preview/<%= @story_name %>', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: editor.value })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Безопасно перезагружаем iframe только если сервер ответил 200 OK
+          previewFrame.contentWindow.location.reload();
+        }
+      })
+      .catch(err => console.error("Preview sync error:", err));
+    }, 400);
+  });
+
+  // 2. СИНХРОНИЗАЦИЯ ПОДСВЕТКИ ИЗОБРАЖЕНИЙ ПО КУРСОРУ
+  editor.addEventListener('keyup', handleCursorMove);
+  editor.addEventListener('click', handleCursorMove);
+
+  function handleCursorMove() {
+    if (!previewFrame || !previewFrame.contentWindow) return;
+
+    const textUpToCursor = editor.value.substring(0, editor.selectionStart);
+    const lines = textUpToCursor.split('\n');
+    const currentLine = lines[lines.length - 1];
+
+    // Ищем маркдаун ссылку на картинку в текущей строке
+    const match = currentLine.match(/!\[.*?\]\((.*?)\)/);
+    if (match && match[1]) {
+      const rawPath = match[1].trim();
+      
+      // "/path/to/DP0Q0624.tif" -> "DP0Q0624"
+      const baseName = rawPath.split('/').pop().split('.').shift();
+      
+      if (baseName) {
+        // Посылаем сигнал во фрейм превью
+        previewFrame.contentWindow.postMessage({ action: 'highlight', id: baseName }, '*');
+      }
+    }
+  }
+
+  // 3. СОХРАНЕНИЕ НА ДИСК
+  function saveManifest() {
+    fetch('/api/save/<%= @story_name %>', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: editor.value })
+    }).then(response => {
+      if (response.ok) {
+        saveBtn.textContent = 'Saved!';
+        setTimeout(() => { saveBtn.textContent = 'Save (Ctrl+S)'; }, 1000);
+      }
+    });
+  }
+
+  saveBtn.addEventListener('click', saveManifest);
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      saveManifest();
+    }
+  });
+</script>
+
+</body>
+</html>
+

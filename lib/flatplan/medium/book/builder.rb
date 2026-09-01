@@ -8,7 +8,7 @@ module Flatplan
       # Compiles a flat book.md manifest into a structured physical Book::Volume.
       # It leverages the core text-parsing algorithms, then redistributes 
       # flat blocks into paired layout Spreads.
-      class Builder < Flatplan::Core::StoryBuilder
+      class Builder < Flatplan::Core::Builder
         def initialize(factory = Flatplan::Medium::Book::Factory.new)
           super(factory)
         end

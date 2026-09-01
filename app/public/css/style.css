@@ -1,0 +1,153 @@
+/* ==========================================================================
+   Flatplan Quiet Art Gallery — Core Stylesheet
+   ========================================================================== */
+
+/* Base Reset & Variables */
+:root {
+  --flatplan-bg: #f9f9f9;     /* Светлый, слегка матовый бумажный фон */
+  --flatplan-text: #1a1a1a;   /* Глубокий графитовый цвет для текста */
+  --flatplan-muted: #8a8a8a;  /* Серый для подписей (captions) */
+  --flatplan-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --flatplan-gap: 2rem;
+  --flatplan-max-width: 1400px;
+}
+
+body {
+  background-color: var(--flatplan-bg);
+  color: var(--flatplan-text);
+  font-family: var(--flatplan-font-sans);
+  line-height: 1.6;
+  margin: 0;
+  padding: 4rem 2rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   1. Structural Sections (Layout Rows)
+   -------------------------------------------------------------------------- */
+.flatplan_section {
+  max-width: var(--flatplan-max-width);
+  margin: 0 auto 6rem auto;
+  display: flow-root; /* Prevents margin collapsing */
+}
+
+/* 2-Column Split Composition (Text and Media) */
+.flatplan_layout_left_text,
+.flatplan_layout_right_text {
+  display: flex;
+  gap: var(--flatplan-gap);
+  align-items: flex-start;
+}
+
+.flatplan_layout_right_text {
+  flex-direction: row-reverse;
+}
+
+/* Handling the Text Flow Toggle */
+/* If flow is false, the text and images remain strictly in their columns */
+.flatplan_flow_false .flatplan_story_text {
+  flex: 0 0 33.333%;
+  position: sticky;
+  top: 4rem;
+}
+
+.flatplan_flow_false .flatplan_media_grid {
+  flex: 0 0 66.666%;
+}
+
+/* If flow is true, we fallback to CSS Grid/Flex wrapping when text ends */
+.flatplan_flow_true {
+  display: block; /* Break flex container alignment to allow CSS wrapping */
+}
+
+.flatplan_flow_true .flatplan_story_text {
+  float: left;
+  width: 33.333%;
+  margin-right: var(--flatplan-gap);
+  margin-bottom: var(--flatplan-gap);
+}
+
+.flatplan_layout_right_text.flatplan_flow_true .flatplan_story_text {
+  float: right;
+  margin-left: var(--flatplan-gap);
+  margin-right: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. Typography Sub-classes
+   -------------------------------------------------------------------------- */
+.flatplan_story_text p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Standalone Text Container Modifiers */
+.flatplan_text_only {
+  display: block;
+}
+
+.flatplan_width_narrow { max-width: 600px; }
+.flatplan_width_normal { max-width: 900px; }
+.flatplan_width_wide   { max-width: var(--flatplan-max-width); }
+
+.flatplan_align_left   { text-align: left; margin-left: 0; }
+.flatplan_align_center { text-align: center; margin-left: auto; margin-right: auto; }
+.flatplan_align_right  { text-align: right; margin-right: 0; }
+
+/* --------------------------------------------------------------------------
+   3. The Media Grid Component
+   -------------------------------------------------------------------------- */
+.flatplan_media_grid {
+  display: grid;
+  gap: var(--flatplan-gap);
+  width: 100%;
+}
+
+/* Columns Strategy */
+.flatplan_cols_1 { grid-template-columns: 1fr; }
+.flatplan_cols_2 { grid-template-columns: repeat(2, 1fr); }
+.flatplan_cols_3 { grid-template-columns: repeat(3, 1fr); }
+.flatplan_cols_4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Aspect Ratio Framing Strategies */
+.flatplan_media_grid figure {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.flatplan_media_grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Natural aspect ratio: photos keep original dimensions */
+.flatplan_aspect_natural img {
+  object-fit: contain;
+}
+
+/* Square mode framing: force strict 1:1 gallery cells */
+.flatplan_aspect_square figure {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Forces 1:1 Aspect Ratio Box */
+}
+
+.flatplan_aspect_square img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Minimalist Caption Styling */
+.flatplan_media_grid figcaption {
+  font-size: 0.85rem;
+  color: var(--flatplan-muted);
+  margin-top: 0.5rem;
+  text-align: left;
+}
+

@@ -16,10 +16,11 @@ module CLI
         exit 1
       end
 
-      options = { keywords: [] }
+      options = { keywords: [], manifiest: nil }
       parser = build_parser(options)
       parse_options!(argv, parser)
-      execute(argv.first, options[:keywords])
+      pp options
+      execute(argv.first, options[:keywords], manifest: options[:manifest])
     end
     
     # Public interface hook implementing the baseline parser lookup
@@ -56,7 +57,7 @@ module CLI
     # #define EX_NOINPUT	66	/* cannot open input */
     # #define EX_NOPERM	  77	/* permission denied */
 
-    def execute(directory, manifest, custom_keywords)
+    def execute(directory, custom_keywords, manifest: nil)
       config = Config.instance
 
       assets_dir = directory if Dir.exist?(directory)
@@ -66,9 +67,9 @@ module CLI
         exit 66
       end
       
-      active_keywords = custom_keywords.empty? ? config.default_keywords : custom_keywords
+      active_keywords = custom_keywords.empty? ? config.keywords : custom_keywords
       warn "#{$0}:  > Generating flatplan manifest"
-      story_manifest = InitCommand.web.call(assets_dir, active_keywords, manifest:)
+      story_manifest = InitCommand.web.call(assets_dir, active_keywords, manifest_name: manifest)
       warn "#{$0}:  > Manifest successfully initialized. Ready for curation."
       puts story_manifest
     end

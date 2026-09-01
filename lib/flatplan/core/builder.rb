@@ -4,10 +4,11 @@ require_relative 'parser'
 
 module Flatplan
   module Core
+    
     # A medium-agnostic base builder that orchestrates parsing of plain manifests.
     # It decomposes text into structured steps, isolates properties, processes images,
     # and delegates final instantiations to the specific target factory.
-    class StoryBuilder
+    class Builder
       # @param factory [Object] a concrete medium factory
       def initialize(factory)
         @factory = factory

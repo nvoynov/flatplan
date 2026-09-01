@@ -46,6 +46,21 @@ module Flatplan
       def append(element)
         @elements << element
       end
+
+      # Returns a flat, unique array of all media objects embedded anywhere inside the story structure.
+      # @return [Array<Object>]
+      def all_media_assets
+        elements.flat_map do |element|
+          if element.respond_to?(:media_assets) && element.media_assets
+            element.media_assets.assets
+          elsif element.respond_to?(:assets)
+            element.assets
+          else
+            []
+          end
+        end.uniq(&:filepath) # assest could be duplicated
+      end
+
     end
   end
 end

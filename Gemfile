@@ -5,6 +5,9 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in punch.gemspec
 # gemspec
 
+gem 'sinatra', '~> 4.1'
+gem 'puma'
+
 group :development do
   gem "rake"
   gem "minitest"

@@ -6,6 +6,7 @@ require_relative 'web/page'
 require_relative 'web/factory'
 require_relative 'web/serializer'
 require_relative 'web/builder'
+require_relative 'web/presenter'
 
 module Flatplan
   module Medium 
@@ -13,5 +14,8 @@ module Flatplan
     module Web
     end
   end
+
+  WebPresenter = Medium::Web::Presenter \
+    unless defined?(WebPresenter)
 end
 

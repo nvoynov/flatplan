@@ -9,7 +9,7 @@ module Flatplan
 
       # Web-specific manifest serializer.
       # It injects web layout vocabulary mappings into the core serialization engine.
-      class Serializer < Flatplan::Core::StorySerializer
+      class Serializer < Flatplan::Core::Serializer
         # Translation map specific only to Web platform display keys
         WEB_PROPERTY_MAP = {
           text_position: 'adjust',

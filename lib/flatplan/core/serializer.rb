@@ -6,7 +6,7 @@ module Flatplan
     # A medium-agnostic base serializer that formats a Story domain entity
     # and its inner layout sections into a standardized text manifest structure.
     # It relies entirely on the built-in metadata hash of each block.
-    class StorySerializer
+    class Serializer
       # Initializes the serializer with a target-specific translation map.
       # @param property_map [Hash{Symbol => String}] maps Ruby keywords to public manifest keys
       def initialize(property_map = {})

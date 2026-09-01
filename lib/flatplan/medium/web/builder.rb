@@ -9,7 +9,7 @@ module Flatplan
       # Concrete Web builder strategy.
       # It inherits the flat manifest parsing engine from Core and implements
       # property translation rules specific to Web layout elements.
-      class Builder < Flatplan::Core::StoryBuilder
+      class Builder < Flatplan::Core::Builder
         # Initializes the web builder with its matching factory.
         # @param factory [Flatplan::Medium::Web::Factory]
         def initialize(factory = Flatplan::Medium::Web::Factory.new)

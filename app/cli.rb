@@ -1,21 +1,15 @@
 require_relative 'basic'
-require_relative "cli/init"
+require_relative 'cli/init'
+require_relative 'cli/preview'
+require_relative 'cli/design'
 
-# Command line inteface
+# Command line interface
 module CLI
   extend self
 
-  # BANNER = <<~TEXT
-  #   \e[36m |\\| |¯  /¯\\  /\\  ¯|¯ | \\ / |¯  (¯ \e[0m
-  #   \e[36m | | |__ \\_] /--\\  |  |  V  |__ __) \e[0m
-  #    manifests: #{Config.instance.stories_dir}
-  #    version: #{VERSION}
-    
-  # TEXT
-
   BANNER = <<~TEXT
     \e[36m |¯ |   /\\ ¯|¯ |¯\\ |   /\\  |\\| \e[0m
-    \e[36m |- |_ /--\\ |  |¯/ |_ /--\\ | | \e[0m
+    \e[36m |- |_ /--\\ |  |¯  |_ /--\\ | | \e[0m
     storage: #{Config.instance.stories_dir}
     version: #{VERSION}
 
