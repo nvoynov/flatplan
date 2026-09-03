@@ -45,35 +45,41 @@ module CLI
     end
 
     def execute(manifest_name)
-      warn "#{APP_NAME} > Generating preview ..."
+      $stdout.sync = true
+      $stderr.sync = true
+
       story_slug = File.basename(manifest_name, '.*')
-      preview = RenderPreview.new.call(story_slug:, manifest_path: manifest_name)
+      
+      # Первая компиляция, чтобы файлы точно легли в кэш
+      RenderPreview.new.call(story_slug: story_slug, manifest_path: manifest_name)
 
       warn "#{APP_NAME} > Starting Flatplan Design engine on http://localhost:4567"
       
+      # Передаем имя активной истории в Синатру через переменную окружения
+      ENV['FLATPLAN_CURRENT_STORY'] = story_slug
+      
       Server.set :port, 4567
       Server.set :server, 'puma'
+      Server.set :logging, true
       
       server_thread = Thread.new do
         Server.run!
       end
 
-      # Даем серверу 1 секунду, чтобы Puma успела проинициализировать порт
       sleep 1
 
-      # 4. Автоматически открываем браузер на нужной истории
       warn "#{APP_NAME} > Launching browser workspace..."
       open_command = RbConfig::CONFIG['host_os'] =~ /darwin/ ? 'open' : 'xdg-open'
-      system("#{open_command} http://localhost:4567/design/#{story_slug}")
+      system("#{open_command} http://localhost:4567/")
 
-      # 5. Блокируем главный поток CLI, чтобы сервер жил, пока пользователь не нажмет Ctrl+C
       begin
         server_thread.join
       rescue Interrupt
-        warn "\n#{APP_NAME} > Design session closed. Flushing memory caches. Goodbye."
+        warn "\n#{APP_NAME} > Design session closed. Goodbye."
         exit 0
       end
     end
+
   end
 end
 

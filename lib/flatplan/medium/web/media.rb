@@ -22,7 +22,7 @@ module Flatplan
         # @param height [Integer, nil] the intrinsic height
         # @param size [Symbol] the layout size relative to the page grid
         def initialize(filepath, captured_at: nil, caption: nil, alt: nil, width: nil, height: nil, size: :standard)
-          super(filepath, captured_at:, caption:, alt:, width:, height:, size:)
+          super(filepath, captured_at:, caption:, alt:, width:, height:)
           @size = size
         end
       end

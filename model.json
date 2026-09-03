@@ -1,0 +1,63 @@
+{
+  "type": "Medium::Web::Page",
+  "data": {
+    "title": "Svalovichi: Two Journeys",
+    "author": "Nikolay Voynov",
+    "slug": "svalovichi-two-journeys",
+    "description": "Initial draft of Svalovichi: Two Journeys",
+    "date": {
+      "type": "Time",
+      "value": "2026-09-03T08:57:08+03:00"
+    },
+    "elements": [
+      {
+        "type": "Medium::Web::TextAndMedia",
+        "data": {
+          "text": {
+            "type": "Medium::Web::Text",
+            "data": {
+              "body": "Svalovichi: An entry into the quiet wild.",
+              "alignment": "left",
+              "width_category": "narrow"
+            }
+          },
+          "media_assets": {
+            "type": "Medium::Web::MediaAssets",
+            "data": {
+              "assets": [
+                {
+                  "type": "Medium::Web::Media",
+                  "data": {
+                    "filepath": "images/photo1.jpg",
+                    "captured_at": null,
+                    "caption": "The lonely house",
+                    "alt": "",
+                    "width": 3000,
+                    "height": 2000,
+                    "size": "standard"
+                  }
+                },
+                {
+                  "type": "Medium::Web::Media",
+                  "data": {
+                    "filepath": "images/photo2.jpg",
+                    "captured_at": null,
+                    "caption": "The wooden boat",
+                    "alt": "",
+                    "width": 3000,
+                    "height": 2000,
+                    "size": "standard"
+                  }
+                }
+              ],
+              "columns": 2,
+              "aspect_mode": "natural"
+            }
+          },
+          "text_position": "left",
+          "flow": false
+        }
+      }
+    ]
+  }
+}

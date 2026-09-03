@@ -21,8 +21,8 @@ module Flatplan
         # @param alignment [Symbol] the horizontal alignment of the text
         # @param width_category [Symbol] the structural width restriction for the layout container
         def initialize(body, alignment: :left, width_category: :narrow)
-          super(body, alignment:, width_category:)        
-          @alignment      = alignment
+          super(body)        
+          @alignment = alignment
           @width_category = width_category
         end
       end

@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 require_relative '../../core'
+require_relative 'media_assets'
+require_relative 'text_and_media'
+require_relative 'volume'
+require_relative 'spread'
+require_relative 'colophon'
 
 module Flatplan
   module Medium
@@ -20,7 +25,7 @@ module Flatplan
 
         # @return [Flatplan::Core::MediaAssets]
         def media_assets(assets, print_template: 'classic_diptych', **_)
-          Flatplan::Core::MediaAssets.new(assets, print_template:)
+          MediaAssets.new(assets, print_template:)
         end
 
         # @return [Flatplan::Medium::Book::TextAndMedia]

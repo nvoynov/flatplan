@@ -62,7 +62,7 @@ module CLI
         end
 
       pandoc_page_content = pandoc_markdown + mixin_script
-      puts pandoc_page_content
+      # puts pandoc_page_content
         
       # prepare compilier assets
       File.write(File.join(workspace_dir, 'source.md'), pandoc_page_content)

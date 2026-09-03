@@ -38,31 +38,23 @@ module Flatplan
       def serialize_section(element)
         output = []
 
-        # 1. Section Title (e.g., "# TextAndMedia")
         class_name = element.class.name.split('::').last
         output << "# #{class_name}"
 
-        # 2. Extract and format presentation metadata safely using the map
-        if element.respond_to?(:metadata) && element.metadata
-          element.metadata.each do |key, value|
-            # Skip keys that might accidentally hold complex objects
-            next if %i[text media assets].include?(key) || value.nil?
-
-            public_key = @property_map.fetch(key, key.to_s)
-            output << "#{public_key}: #{value}"
-          end
+        medium_spec = element.class.initialize_args - %i[text media assets media_assets]
+        medium_spec.each do |spec|
+          key = @property_map.fetch(spec, spec.to_s)
+          output << "#{key}: #{element.public_send(spec)}"
         end
-
+        
         output << "" # Empty line separator before payload data
 
-        # 3. Process Text content if present
         if element.respond_to?(:text) && element.text
           output << element.text.body
         elsif element.respond_to?(:body) && element.body
           output << element.body
         end
 
-        # 4. Process Media Assets if present
         media_group = if element.respond_to?(:media) then element.media
                       elsif element.respond_to?(:assets) then element
                       end

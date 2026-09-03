@@ -16,7 +16,7 @@ module Flatplan
         # @param media_assets [Flatplan::Core::MediaAssets] core media assets collection
         # @param print_layout [Symbol] spread typography layout rules
         def initialize(text, media_assets, print_layout: :text_left_images_right)
-          super(text, media_assets, print_layout:)
+          super(text, media_assets)
           @print_layout = print_layout
         end
       end

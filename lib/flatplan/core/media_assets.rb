@@ -14,9 +14,9 @@ module Flatplan
 
       # Initializes the container with an ordered array of media assets.
       # @param assets [Array<Media>]
-      def initialize(assets, **kwargs)
+      def initialize(assets)
         @assets = assets
-        super(**kwargs)
+        super()
       end
     end
   end

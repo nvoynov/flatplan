@@ -48,9 +48,10 @@ describe 'Flatplan Publication Lifecycle' do
       compiled_block = compiled_page.elements.first
       assert_equal :left, compiled_block.text_position
       assert_equal false, compiled_block.flow
+      
 
-      pp compiled_page.to_h
-      pp Core::Story.from_h(compiled_page.to_h)
+      puts JSON.pretty_generate(web_page.to_h)
+      # pp Medium::Web::Page.from_h(web_page.to_h)
     end
   end
 
@@ -105,10 +106,10 @@ describe 'Flatplan Publication Lifecycle' do
       # Проверяем, что первый разворот правильно разложил компоненты по полосам
       first_spread = compiled_book.spreads.first
       assert_match(/Svalovichi/, first_spread.left_page.body)
-      assert_equal "classic_diptych", first_spread.right_page.metadata[:print_template]
+      assert_equal "classic_diptych", first_spread.right_page.print_template
 
       # Проверяем наличие автоматического колофона на последнем развороте
-      assert_equal "ArtPrint Co", compiled_book.spreads.last.right_page.metadata[:printer]
+      assert_equal "ArtPrint Co", compiled_book.spreads.last.right_page.printer
     end
   end
 end

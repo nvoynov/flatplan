@@ -15,6 +15,25 @@ __TODO__
      Flatplan.all_images
      Flatplan.all_series (stories)
 
+## 2016-09-04
+
+- [] clean metadata from Serializable
+- [] fix/finish Designer for lost blocks during moving up and down
+- [] sort images by created_at in core/buider
+- [] maybe add Story#all_text/narrative that will serve for Exposure public/hidden series
+
+## 2016-09-03
+
+- designed Core::Serializable for hash serialization/deserialization
+- removed metadata from Core (still remains in Serializable)
+- added Designer NOT FINISHED
+  - app/presenter/designer, builder
+  - app/server.rb
+  - app/public/desginer.html
+  - app/public/css/desinger.css
+  - app/public/js/designer.js
+- added `flatplan design` CLI
+
 ## 2016-09-02
 
 - [] reveiew the necessity of matadata; let it be but business logick depends on properties NOT metadata

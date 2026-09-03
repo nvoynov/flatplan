@@ -17,7 +17,7 @@ module Flatplan
         def initialize(left_page = nil, right_page = nil, **kwargs)
           @left_page  = left_page
           @right_page = right_page
-          super(**kwargs)
+          super()
         end
       end
     end

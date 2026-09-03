@@ -16,7 +16,7 @@ module Flatplan
       # @param body [String] the raw Markdown text
       def initialize(body, **kwargs)
         @body = body
-        super(**kwargs)
+        super()
       end
     end
   end

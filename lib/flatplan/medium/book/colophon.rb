@@ -15,7 +15,7 @@ module Flatplan
           @printer      = printer
           @paper_type   = paper_type
           @edition_size = edition_size
-          super(printer: printer, paper_type: paper_type, edition_size: edition_size)
+          super()
         end
       end
     end

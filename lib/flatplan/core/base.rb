@@ -9,16 +9,10 @@ module Flatplan
     # and serialization capability for all publication blocks.
     class Base
       include Serializable
-      # @return [Hash] raw metadata configuration dictionary
-      attr_reader :metadata
 
-      # Initializes the base block and dynamically generates getters for provided metadata.
-      # @param kwargs [Hash] arbitrary metadata properties
-      def initialize(**kwargs)
-        @metadata = kwargs
+      def initialize
       end
     end
-    
   end
 end
 

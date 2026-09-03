@@ -22,17 +22,10 @@ module Flatplan
         # @param text_position [Symbol] side of the screen where the text is rendered
         # @param flow [Boolean] toggle for text-wrapping/grid-expanding behavior
         def initialize(text, media_assets, text_position: :left, flow: false)
-          super(text, media_assets, text_position:, flow:)
+          super(text, media_assets)
           @text_position = text_position
-          @flow          = flow
+          @flow = flow
         end
-
-        # @return [Hash]
-        def metadata
-          own_meta = @metadata || {}
-          nested_media_meta = media_assets.respond_to?(:metadata) ? media_assets.metadata : {}
-          own_meta.merge(nested_media_meta)
-        end        
       end
     end
   end

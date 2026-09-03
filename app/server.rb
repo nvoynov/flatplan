@@ -4,59 +4,104 @@ require 'sinatra/base'
 require 'json'
 require_relative 'basic'
 require_relative 'cli/render_preview'
+require_relative 'designer/presenter'
+require_relative 'designer/builder'
 
 class Server < Sinatra::Base
-  set :views, File.expand_path('views', __dir__)
+  # Родная папка для designer.html, js/designer.js и css/designer.css
   set :public_folder, File.expand_path('public', __dir__)
   
   helpers do
-    def config
-      # @config ||= Flatplan::Core::Config.instance
-      @config ||= Config.instance
+    def config; @config ||= Config.instance; end
+    # Читаем активную историю, переданную из CLI-команды flatplan design
+    def current_story; ENV['FLATPLAN_CURRENT_STORY']; end
+    def manifest_path; File.join(config.stories_dir, "#{current_story}.md"); end
+    
+    def json_response(data)
+      content_type :json
+      data.to_json
+    end
+  end
+
+  # =========================================================================
+  # 1. СТАТИКА И ИНТЕРФЕЙС (ОДИН СЕРВЕР)
+  # =========================================================================
+
+  # Главная страница Дизайнера
+  get '/' do
+    send_file File.join(settings.public_folder, 'designer.html')
+  end
+
+  # Роут превью: отдает сам скомпилированный HTML-файл из папки кэша
+  get '/preview.html' do
+    preview_path = File.join(config.stories_dir, '.cache', 'preview', current_story, 'preview.html')
+    if File.exist?(preview_path)
+      send_file preview_path
+    else
+      status 404
+      "<h3>No preview generated yet.</h3>"
+    end
+  end
+
+  # ЖЕЛЕЗОБЕТОННЫЙ РОУТ ДЛЯ КАРТИНОК И СТИЛЕЙ PREVIEW
+  # Этот единственный роут перехватывает любые относительные запросы из iframe
+  # (например, /DP0Q0624.webp или /style.css) и берет их прямо из папки кэша!
+  get '/:file' do
+    file_path = File.join(config.stories_dir, '.cache', 'preview', current_story, params[:file])
+    if File.exist?(file_path)
+      send_file file_path
+    else
+      status 404
+    end
+  end
+
+  get '/:file' do
+    puts params[:file]
+    # Находим папку кэша текущей истории
+    workspace_dir = File.join(config.stories_dir, '.cache', 'preview', current_story)
+    
+    # Ищем файл внутри этой папки без учёта регистра букв
+    actual_file = Dir.glob(File.join(workspace_dir, '*')).find do |f|
+      File.basename(f).downcase == params[:file].downcase
+    end
+
+    if actual_file && File.exist?(actual_file)
+      send_file actual_file
+    else
+      status 404
     end
   end
   
-  # Main Editor window
-  get '/design/:story' do
-    @story_name = params[:story]
-    manifest_path = File.join(config.stories_dir, "#{@story_name}.md")
+  # =========================================================================
+  # 2. ЧИСТОЕ REST JSON API
+  # =========================================================================
 
-    redirect to('/') unless File.exist?(manifest_path)
-
-    @manifest_content = File.read(manifest_path)
-    erb :designer
+  get '/api/design' do
+    story_model = Flatplan::Command::Read.web.call(manifest_path)
+    ui_data = Designer::Presenter.call(story_model)
+    json_response(ui_data)
   end
 
-  # Отдача скомпилированного превью внутрь iframe
-  get '/preview/:story' do
-    preview_html_path = File.join(config.stories_dir, '.cache', 'preview', params[:story], 'preview.html')
+  post '/api/save' do
+    ui_payload = JSON.parse(request.body.read, symbolize_names: true)
+    strict_hash = Designer::Builder.call(ui_payload)
     
-    if File.exist?(preview_html_path)
-      send_file preview_html_path
-    else
-      "<h3>No preview generated yet. Start typing...</h3>"
-    end
-  end
-
-  # API: Live rendering from textarea buffer
-  post '/api/preview/:story' do
-    payload = JSON.parse(request.body.read)
-
-    CLI::RenderPreview.new.call(
-      story_slug: params[:story],
-      raw_content: payload['content']
-    )
-
+    model = ModelClass.from_h(strict_hash)
+    Flatplan::Command::Write.web.call(model, manifest_path)
     status 200
   end
 
-  # API: write manifest to diski (Commit)
-  post '/api/save/:story' do
-    payload = JSON.parse(request.body.read)
-    manifest_path = File.join(config.stories_dir, "#{params[:story]}.md")
+  post '/api/preview' do
+    ui_payload = JSON.parse(request.body.read, symbolize_names: true)
+    strict_hash = Designer::Builder.call(ui_payload)
+    model = Medium::Web::Page.from_h(strict_hash)
 
-    File.write(manifest_path, payload['content'])
+    raw_manifest_string = Flatplan::Core::Serializer.new.serialize(model)
+
+    CLI::RenderPreview.new.call(
+      story_slug: current_story,
+      raw_content: raw_manifest_string
+    )
     status 200
   end
 end
-

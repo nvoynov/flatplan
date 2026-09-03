@@ -34,14 +34,14 @@ module Flatplan
       # @param alt [String, nil] the accessibility description
       # @param width [Integer, nil] the intrinsic width
       # @param height [Integer, nil] the intrinsic height
-      def initialize(filepath, captured_at: nil, caption: nil, alt: nil, width: nil, height: nil, **kwargs)
+      def initialize(filepath, captured_at: nil, caption: nil, alt: nil, width: nil, height: nil)
         @filepath = filepath
         @captured_at = captured_at
         @caption  = caption || ''
         @alt      = alt || ''
         @width    = width
         @height   = height
-        super(**kwargs.merge(captured_at:))
+        super()
       end
     end
   end

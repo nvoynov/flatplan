@@ -1,3 +1,4 @@
+require_relative 'book/media_assets'
 require_relative 'book/text_and_media'
 require_relative 'book/volume'
 require_relative 'book/spread'
