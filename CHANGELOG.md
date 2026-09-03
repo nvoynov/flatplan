@@ -8,39 +8,21 @@ __Series__
 - [ ] repeat for Svalovichi
 - [ ] start for Almaznoe
 
-__Negatives__
+__TODO__
 
-- [ ] maybe provide `lens: "manual"` instead of nil`
+- [] maybe add manfifest that return all manifests in working directory
+     mabye it will serve as Exposure Gallery but rather Flatplan
+     Flatplan.all_images
+     Flatplan.all_series (stories)
 
-__Imprint__ prints ledger management by using DSL batch processing
+## 2016-09-02
 
-- [ ] design data and events model
-- [ ] design events DSL
-- [ ] design the component interface for querying prints availability for particular images and whole series (:DP2Q1058, :P01013456)
+- [] reveiew the necessity of matadata; let it be but business logick depends on properties NOT metadata
+- [] implenet Designerl discussed
 
-__Expozen__
-
-- [ ] Basic styling for mimicking exposrue; for header, footer, and about
-- [ ] Magick CLI for resizing, making mosaics and collages
-- [ ] import series from Flatplan
-- [ ] port JSs, such as `sw.js`, `Todd Hido mosaic`, and `mobile image-rotator`?
-- [ ] port CSS for mozaic and series collage
-- [ ] fix mozaic thing when 3rd row completely empty
-- [ ] desing `/clearence` page based on Imprint
-- [ ] maybe design `/prints` page based on Imprint
-
-__Flatplan__
-
-- [ ] maybe SeriesPuliccation < LayotSection with :media_assets?
-- [ ] update Kairos (replace source and test)
-- [ ] make default adapters initializer
-- [ ] ensure `bin/flaplan init` does not rewrite existing series
-- [ ] make `bin/flatplan update/refresh SERIES` command that will fix manifest by removing images that not exist, and adding new images in new section
-
-
-- [] new `bin/flatplan init` creates new manifest and open Designer (no need to for `preview` command - designer will fit)
-- [] new BuildPandocWeb that creates Pandoc Markdown page for html compilation
-
+- `preview ... --watch` starts server and gives live-preview where one can change manifest file and see the changed made (usign `entr`)
+- added `Core::Serializable` module for mdels hash serializtion
+- discussed Designer feature for live-view and changing sections/images order and sections metadata 
 
 ## 2026-09-01
 

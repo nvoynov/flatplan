@@ -48,6 +48,9 @@ describe 'Flatplan Publication Lifecycle' do
       compiled_block = compiled_page.elements.first
       assert_equal :left, compiled_block.text_position
       assert_equal false, compiled_block.flow
+
+      pp compiled_page.to_h
+      pp Core::Story.from_h(compiled_page.to_h)
     end
   end
 

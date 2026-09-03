@@ -26,7 +26,7 @@ module CLI
     # @param raw_content [String, nil] text from memory buffer, if present
     # @param manifest_path [String, nil] text from file, if present
     # @return [String] full path to the compiled preview.html
-    def call(story_slug:, raw_content: nil, manifest_path: nil)
+    def call(story_slug:, raw_content: nil, manifest_path: nil, mixin_script: nil)
       config = Config.instance
       workspace_dir = File.join(config.stories_dir, '.cache', 'preview', story_slug)
       FileUtils.mkdir_p(workspace_dir)
@@ -50,32 +50,22 @@ module CLI
       pandoc_markdown = @presenter.serialize(story_page)
 
       # mixin JavaScript postMessage handler for iframe
-      highlight_script = <<~HTML
-        
-        ```{=html}
-        <script>
-          window.addEventListener('message', (e) => {
-            if (e.data.action === 'highlight') {
-              document.querySelectorAll('.flatplan_image_cell').forEach(el => {
-                el.style.outline = 'none';
-                el.style.boxShadow = 'none';
-              });
-              
-              const activeCell = document.getElementById(e.data.id);
-              if (activeCell) {
-                activeCell.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                activeCell.style.outline = '3px solid #ffaa00';
-                activeCell.style.outlineOffset = '5px';
-                activeCell.style.boxShadow = '0 0 20px rgba(255, 170, 0, 0.4)';
-              }
-            }
-          });
-        </script>
-        ```
-      HTML
+      mixin_script =
+        if mixin_script
+           <<~HTML
+             ```{=html}
+             #{mixin_script}
+             ```  
+           HTML
+        else
+          ''
+        end
 
+      pandoc_page_content = pandoc_markdown + mixin_script
+      puts pandoc_page_content
+        
       # prepare compilier assets
-      File.write(File.join(workspace_dir, 'source.md'), pandoc_markdown + highlight_script)
+      File.write(File.join(workspace_dir, 'source.md'), pandoc_page_content)
       
       style_source = File.expand_path('../public/css/style.css', __dir__)
       FileUtils.cp(style_source, File.join(workspace_dir, 'style.css'))
@@ -86,6 +76,9 @@ module CLI
         destination: 'preview.html',
         workspace:   workspace_dir
       )
+
+      # NOTE: write timestamp to version.txt
+      File.write(File.join(workspace_dir, 'version.txt'), Time.now.to_f.to_s)
 
       File.join(workspace_dir, 'preview.html')
     end

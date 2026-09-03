@@ -8,6 +8,7 @@ require_relative 'core/factory'
 require_relative 'core/initializer'
 require_relative 'core/serializer'
 require_relative 'core/builder'
+require_relative 'core/serializable'
 
 module Flatplan
   # Content model namespace

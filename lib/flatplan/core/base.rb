@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
+require_relative 'serializable'
+
 module Flatplan
   module Core
 
     # Base class providing dynamic metadata handling, automatic getter generation,
     # and serialization capability for all publication blocks.
     class Base
+      include Serializable
       # @return [Hash] raw metadata configuration dictionary
       attr_reader :metadata
 
@@ -13,14 +16,6 @@ module Flatplan
       # @param kwargs [Hash] arbitrary metadata properties
       def initialize(**kwargs)
         @metadata = kwargs
-      end
-
-      # Serializes the block structure into a plain Ruby Hash.
-      # @return [Hash]
-      def to_h
-        {
-          type: self.class.name.rpartition('::').last.to_sym
-        }.merge(@metadata)
       end
     end
     
