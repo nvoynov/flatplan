@@ -61,6 +61,22 @@ module Flatplan
         end.uniq(&:filepath) # assest could be duplicated
       end
 
+      # @return [String] compbined text sections narrative
+      def text_narrative
+        get_text = proc {
+          case it
+          when Text
+            it.body
+          when TextAndMedia
+            it.text_content
+          end
+        }
+        
+        elements.flat_mapi(&get_text)
+          .compact
+          .map(&:strip)
+          .join("\n\n")
+      end
     end
   end
 end

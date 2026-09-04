@@ -17,9 +17,13 @@ __TODO__
 
 ## 2016-09-04
 
+- made decission to stop working on Designer, maybe left code inside feat/designer
+- made Serializer sort image assets by :captured_at
+- added Story#text_narrative
+
 - [] clean metadata from Serializable
 - [] fix/finish Designer for lost blocks during moving up and down
-- [] sort images by created_at in core/buider
+- [x] sort images by created_at in core/buider
 - [] maybe add Story#all_text/narrative that will serve for Exposure public/hidden series
 
 ## 2016-09-03

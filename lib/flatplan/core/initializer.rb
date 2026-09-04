@@ -39,7 +39,7 @@ module Flatplan
             width: match['width']&.to_i,
             height: match['height']&.to_i
           )
-        end
+        end.sort_by(&:captured_at)
 
         media_assets_element = @factory.media_assets(media_list)
 

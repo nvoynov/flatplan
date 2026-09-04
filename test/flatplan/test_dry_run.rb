@@ -50,7 +50,7 @@ describe 'Flatplan Publication Lifecycle' do
       assert_equal false, compiled_block.flow
       
 
-      puts JSON.pretty_generate(web_page.to_h)
+      # puts JSON.pretty_generate(web_page.to_h)
       # pp Medium::Web::Page.from_h(web_page.to_h)
     end
   end

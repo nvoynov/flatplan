@@ -98,8 +98,70 @@ function renderTree() {
   initSortables();
 }
 
-// === 3. NESTED DRAG-AND-DROP (SORTABLE) WIREFRAME ===
+// === 4. IN-MEMORY RUNTIME LOCALCACHE MUTATORS ===
+function reorderRootBlocks() {
+  console.log("LOG: Reordering root blocks based on DOM...");
+  
+  const currentOrderIds = Array.from(document.querySelectorAll('.root-block'))
+                               .map(el => el.getAttribute('data-block-id'));
+  
+  // Собираем новый массив строго по физическому порядку на экране
+  const reorderedBlocks = currentOrderIds.map(id => {
+    return localStoryData.blocks.find(block => block.id === id);
+  }).filter(Boolean);
+
+  localStoryData.blocks = reorderedBlocks;
+  console.log("LOG: New order saved in memory.");
+}
+
+// 2. СИНХРОНИЗАЦИЯ ПРЕВЬЮ С ПОЛНОЙ ПЕРЕРИСОВКОЙ ТРЕТА
+function syncPreview() {
+  console.log("LOG: Syncing modified JSON layout with server...");
+  
+  fetch('/api/preview', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(localStoryData)
+  }).then(res => {
+    if (res.ok) {
+      console.log("LOG: Server compiled preview successfully. Refreshing viewports...");
+      
+      // Перезагружаем правый фрейм, чтобы увидеть новую верстку
+      document.getElementById('preview_plane').contentWindow.location.reload();
+      
+      // КРИТИЧНО ДЛЯ СОРТИРОВКИ: Принудительно перерисовываем левое дерево, 
+      // чтобы SortableJS инициализировал новые чистые контейнеры для блоков и картинок!
+      renderTree();
+    }
+  });
+}
+
+// ИСПРАВЛЕННАЯ ФУНКЦИЯ: Универсальное перемещение картинок
+function moveAssetInMemory(sourceId, targetId, assetId, newIndex) {
+  const sourceBlock = localStoryData.blocks.find(b => b.id === sourceId);
+  
+  // Находим саму картинку в исходном блоке
+  const assetIndex = sourceBlock.media_assets.findIndex(a => a.id === assetId);
+  if (assetIndex === -1) return; // Страховка от сбоев
+  
+  // Вырезаем картинку из старого места
+  const [movedAsset] = sourceBlock.media_assets.splice(assetIndex, 1);
+
+  if (sourceId === targetId) {
+    console.log(`LOG: Internal sorting inside block ${sourceId} from index ${assetIndex} to ${newIndex}`);
+    // Если сортируем внутри одного блока, вставляем в этот же массив
+    sourceBlock.media_assets.splice(newIndex, 0, movedAsset);
+  } else {
+    console.log(`LOG: Cross-block sorting from ${sourceId} to ${targetId}`);
+    // Если картинка уехала в другой блок, ищем целевой блок и вставляем туда
+    const targetBlock = localStoryData.blocks.find(b => b.id === targetId);
+    targetBlock.media_assets.splice(newIndex, 0, movedAsset);
+  }
+}
+
+// ОБНОВЛЕННАЯ НАСТРОЙКА SORTABLEJS (Добавляем явное событие для внутренней сортировки)
 function initSortables() {
+  // Родительские блоки
   new Sortable(document.getElementById('blocks_tree'), {
     animation: 150,
     handle: '.root-handle',
@@ -110,16 +172,20 @@ function initSortables() {
     }
   });
 
+  // Картинки внутри блоков
   document.querySelectorAll('.media-dropzone').forEach(zone => {
     new Sortable(zone, {
       animation: 150,
       group: 'shared_media_pool',
       ghostClass: 'sortable-ghost',
+      
+      // onEnd ловит абсолютно любые окончания перетаскиваний (и внутренние, и внешние)
       onEnd: function (evt) {
         const sourceBlockId = evt.from.getAttribute('data-block-id');
         const targetBlockId = evt.to.getAttribute('data-block-id');
         const assetId = evt.item.getAttribute('data-asset-id');
 
+        // Вызываем нашу обновленную функцию, которая теперь умеет работать внутри одного блока
         moveAssetInMemory(sourceBlockId, targetBlockId, assetId, evt.newIndex);
         syncPreview();
       }
@@ -127,43 +193,11 @@ function initSortables() {
   });
 }
 
-// === 4. IN-MEMORY RUNTIME LOCALCACHE MUTATORS ===
-function reorderRootBlocks() {
-  const currentOrderIds = Array.from(document.querySelectorAll('.root-block')).map(el => el.getAttribute('data-block-id'));
-  localStoryData.blocks.sort((a, b) => currentOrderIds.indexOf(a.id) - currentOrderIds.indexOf(b.id));
-}
-
-function moveAssetInMemory(sourceId, targetId, assetId, newIndex) {
-  const sourceBlock = localStoryData.blocks.find(b => b.id === sourceId);
-  const targetBlock = localStoryData.blocks.find(b => b.id === targetId);
-  
-  const assetIndex = sourceBlock.media_assets.findIndex(a => a.id === assetId);
-  const [movedAsset] = sourceBlock.media_assets.splice(assetIndex, 1);
-
-  targetBlock.media_assets.splice(newIndex, 0, movedAsset);
-}
-
-function toggleInspector(blockId) {
-  const el = document.getElementById(`inspector_${blockId}`);
-  el.style.display = el.style.display === 'block' ? 'none' : 'block';
-}
-
 function updateMetadata(blockId, key, value) {
   const block = localStoryData.blocks.find(b => b.id === blockId);
   if (key === 'columns') value = parseInt(value, 10) || 2;
   block.metadata[key] = value;
   syncPreview();
-}
-
-// === 5. EXTERNAL API ROUTING COMMITS ===
-function syncPreview() {
-  fetch('/api/preview', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(localStoryData)
-  }).then(() => {
-    document.getElementById('preview_plane').contentWindow.location.reload();
-  });
 }
 
 function saveLayout() {
