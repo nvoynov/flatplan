@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'fileutils'
+
+# Configuration Constants
+PROJECT_ROOT  = File.expand_path('..', __dir__)
+LOCAL_BIN_DIR = File.join(Dir.home, '.local', 'bin')
+
+# List your suite's console utilities here (must match the installer list)
+EXECUTABLES = ['flatplan']
+
+puts "Starting the suite uninstallation script..."
+
+removed_count = 0
+
+EXECUTABLES.each do |exe_name|
+  target_link = File.join(LOCAL_BIN_DIR, exe_name)
+
+  # Check if the file exists and is indeed a symbolic link
+  if File.symlink?(target_link)
+    FileUtils.rm_f(target_link)
+    puts "  Removed symlink: #{target_link}"
+    removed_count += 1
+  elsif File.exist?(target_link)
+    puts "  Warning: '#{target_link}' exists but is not a symlink. Skipping to avoid data loss."
+  else
+    puts "  Information: '#{exe_name}' was not found in #{LOCAL_BIN_DIR}."
+  end
+end
+
+if removed_count.positive?
+  puts "\n  Uninstallation completed successfully! Removed #{removed_count} utilities."
+else
+  puts "\n  No suite utilities were found to uninstall."
+end
+

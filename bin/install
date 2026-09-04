@@ -1,0 +1,70 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'fileutils'
+
+# Configuration Constants
+REQUIRED_RUBY = '3.4.0'
+PROJECT_ROOT  = File.expand_path('..', __dir__)
+LOCAL_BIN_DIR = File.join(Dir.home, '.local', 'bin')
+
+# List your suite's console utilities here (matching files in your exe/ folder)
+EXECUTABLES = ['flatplan']
+
+puts "  > Starting the flatplan installation..."
+
+# 1. Validate Ruby Version Compatibility
+current_ruby = Gem::Version.new(RUBY_VERSION)
+target_ruby  = Gem::Version.new(REQUIRED_RUBY)
+
+if current_ruby < target_ruby
+  abort "  X Error: This suite requires Ruby >= #{REQUIRED_RUBY}. Current version: #{RUBY_VERSION}"
+end
+
+# 2. Validate and Install Application Dependencies via Bundler
+Dir.chdir(PROJECT_ROOT) do
+  puts "  > Verifying local gem dependencies..."
+  
+  # 'bundle check' verifies if all gems listed in Gemfile are already installed
+  unless system('bundle check', out: File::NULL, err: File::NULL)
+    puts "  Dependencies missing. Running 'bundle install'..."
+    abort "  X Error: 'bundle install' failed to execute properly." unless system('bundle install')
+  end
+end
+
+# 3. Ensure the User's Local Bin Directory Exists
+unless Dir.exist?(LOCAL_BIN_DIR)
+  FileUtils.mkdir_p(LOCAL_BIN_DIR)
+  puts "  Created local bin directory: #{LOCAL_BIN_DIR}"
+end
+
+# 4. Generate Clean Symlinks in ~/.local/bin
+EXECUTABLES.each do |exe_name|
+  source_path = File.join(PROJECT_ROOT, 'exe', exe_name)
+  target_link = File.join(LOCAL_BIN_DIR, exe_name)
+  
+  unless File.exist?(source_path)
+    puts "  ! Warning: Source file 'exe/#{exe_name}' not found. Skipping."
+    next
+  end
+
+  # Ensure the source file is executable (equivalent to chmod +x)
+  File.chmod(0755, source_path)
+  
+  # Remove existing symlink or file to prevent FileExists errors during updates
+  FileUtils.rm_f(target_link)
+  
+  # Create the symbolic link
+  File.symlink(source_path, target_link)
+  puts "  ✅ Symlink created: #{target_link} -> #{source_path}"
+end
+
+# 5. Provide Feedback Regarding the User's $PATH Configuration
+unless ENV['PATH'].split(':').include?(LOCAL_BIN_DIR)
+  puts "\n💡 Note: #{LOCAL_BIN_DIR} is currently not found in your system $PATH."
+  puts "To run these utilities globally, append this line to your ~/.bashrc or ~/.zshrc:"
+  puts "  export PATH=\"\$HOME/.local/bin:\$PATH\""
+end
+
+puts "\n  The flatplan application successfully installed!"
+

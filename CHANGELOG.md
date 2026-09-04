@@ -2,19 +2,19 @@
 
 ## TODO
 
-__Series__
+- [] test TextAndMedia flow with text and images, maybe change
 
-- [ ] review Stonetomp again, maybe change artistic narrative and layout
-- [ ] repeat for Svalovichi
-- [ ] start for Almaznoe
+## [v0.3.0] - 2016-09-04
 
-__TODO__
-
-- [] maybe add manfifest that return all manifests in working directory
-     mabye it will serve as Exposure Gallery but rather Flatplan
-     Flatplan.all_images
-     Flatplan.all_series (stories)
-
+- updated medium specific model of Core, Medium::Web, Medium:Book
+- updated `flatplan preview` by key `-w/--watch` for live preview
+- updated Medium::Web::Presenter (Pandoc Markdown) by ability to modify images and accepting extra keywords for frontmatter like `layout: series`
+- configuration provides `stories_dir` and `assets_dir`
+- manifests stored under `stories_dir`
+- main configuration file placed as `./config/flatplan.yml` and application try to load configuration inside working directroy first and use default location when not found
+- added `bin/install`, `bin/uninstall`
+- moved application as `exe/flatplan`
+    
 ## 2016-09-04
 
 - made decission to stop working on Designer, maybe left code inside feat/designer

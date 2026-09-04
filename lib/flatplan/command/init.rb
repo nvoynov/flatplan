@@ -57,6 +57,7 @@ module Flatplan
         
         story = @factory.story(title,
           author: config.author,
+          date: Time.now,
           elements:, keywords:)
         
         FileUtils.mkdir_p File.dirname(manifest)  

@@ -10,22 +10,31 @@ module Flatplan
       class Presenter
 
         # @param path_modifier [Hash, nil] rules to modify image paths on the fly (e.g., ext: '.jpg', dir: '')
-        def initialize(path_modifier: nil)
+        # @param kwargs [Hash] additional frontmatter metadata 
+        def initialize(path_modifier: nil, **kwargs)
           @path_modifier = path_modifier
+          @page_metadata = kwargs
         end
         
         # Main entry point to serialize a page into Pandoc-compliant Markdown.
         # @param page [Flatplan::Medium::Web::Page]
         # @return [String]
         def serialize(page)
-          header = <<~MARKDOWN
-            ---
-            title: "#{page.title}"
-            author: "#{page.author}"
-            description: "#{page.description}"
-            ---
-          MARKDOWN
-
+          header = {
+            title: page.title,
+            author: page.author,
+            date: page.date,
+            description: page.description
+          }.then{
+            @page_metadata.any? ? it.merge(@page_metadata) : it
+          }.then{
+            <<~FRONTMATTER
+              ---
+              #{it.map{|k, v| "#{k}: #{v.to_s.inspect}" }.join("\n")}
+              ---
+            FRONTMATTER
+          }
+          
           body = page.elements
             .map { render_element(it) }
             .join("\n\n")

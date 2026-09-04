@@ -3,27 +3,25 @@ require 'time'
 
 module Flatplan
   module Core
+
+    # NOTE: not used but could be helpful in future
+    # Model hash paresenter/builder
     module Serializable
       def self.included(base)
         base.extend(ClassMethods)
       end
 
-      # Сериализация с использованием паттерн-матчинга
       def to_h
         explicit_args = self.class.initialize_args
 
-        # Собираем плоский хэш по аргументам конструктора
         data_hash = explicit_args.each_with_object({}) do |arg, hash|
           hash[arg] = send(arg) if respond_to?(arg)
         end
 
-        # Лямбда для глубокой рекурсивной сериализации
         deep_h = ->(arg) do
           case arg
-          # Проверяем, что это объект нашей сериализуемой модели, а не стандартный Array/Hash
           in Flatplan::Core::Serializable if arg != self
             arg.to_h
-          # Сериализация временных типов в ISO 8601 с маркерами
           in DateTime
             { type: :DateTime, value: arg.iso8601 }
           in Time
@@ -40,23 +38,14 @@ module Flatplan
           end
         end
 
-        # Глубоко сериализуем собранные данные
         serialized_data = data_hash.transform_values(&deep_h)
 
-        # Вычищаем явные аргументы из метаданных
-        clean_metadata = if respond_to?(:metadata) && metadata.is_a?(Hash)
-                           metadata.reject { |k, _| explicit_args.include?(k.to_sym) }
-                         else
-                           {}
-                         end
-
-        # Вычисляем относительное имя класса от корня Flatplan
         relative_class_name = self.class.name.sub(/^Flatplan::/, '')
 
         {
           type: relative_class_name.to_sym,
           data: serialized_data
-        }.merge(clean_metadata)
+        }
       end
 
       module ClassMethods
@@ -64,11 +53,9 @@ module Flatplan
           instance_method(:initialize).parameters.map { |_type, name| name }.compact
         end
 
-        # Десериализация полиморфных неймспейсов
         def from_h(hash)
           return nil if hash.nil?
 
-          # Утилита для глубокой рекурсивной символизации ключей (убирает строки навсегда)
           symbolize = ->(obj) do
             case obj
             when Hash
@@ -80,16 +67,13 @@ module Flatplan
             end
           end
 
-          # Принудительно превращаем все ключи хэша в символы
           symbolized_hash = symbolize.call(hash)
 
-          # Поиск класса строго внутри корневого модуля Flatplan
           find_class = ->(class_name) do
             full_name = class_name.start_with?('Flatplan::') ? class_name : "Flatplan::#{class_name}"
             Object.const_get(full_name) rescue nil
           end
 
-          # Рекурсивный гидратор (работает только с символами!)
           from_deep_h = ->(arg) do
             case arg
             # 1. Восстановление системных типов
@@ -100,15 +84,9 @@ module Flatplan
             in { type: :Date, value: String => val }
               Date.parse(val)
 
-            # 2. Структура сериализованной модели Flatplan
             in { type: type, data: Hash => data }
               target_klass = find_class.call(type.to_s)
               return arg unless target_klass
-
-              hydrated_data = data.transform_values(&from_deep_h)
-              
-              metadata_source = arg.reject { |k, _| [:type, :data].include?(k) }
-              all_sources = metadata_source.merge(hydrated_data)
 
               positional_values = []
               keyword_values = {}

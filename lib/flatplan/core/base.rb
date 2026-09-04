@@ -5,13 +5,15 @@ require_relative 'serializable'
 module Flatplan
   module Core
 
-    # Base class providing dynamic metadata handling, automatic getter generation,
-    # and serialization capability for all publication blocks.
+    # Base class
     class Base
-      include Serializable
-
-      def initialize
+      def self.initialize_args
+        instance_method(:initialize).parameters
+          .map { |_type, name| name }
+          .compact
       end
+
+      def initialize_args = self.class.initialize_args
     end
   end
 end

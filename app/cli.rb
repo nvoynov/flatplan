@@ -1,7 +1,6 @@
 require_relative 'basic'
 require_relative 'cli/init'
 require_relative 'cli/preview'
-require_relative 'cli/design'
 
 # Command line interface
 module CLI

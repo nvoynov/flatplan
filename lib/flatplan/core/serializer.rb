@@ -27,6 +27,7 @@ module Flatplan
         MARKDOWN
 
         body = story.elements.map { |element| serialize_section(element) }.join("\n\n")
+
         "#{header}\n#{body}\n"
       end
 

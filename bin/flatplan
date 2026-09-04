@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-require 'pathname'
-
-exe = Pathname.new(__FILE__).realpath
-app = exe.parent.parent.join('app')
-$LOAD_PATH.unshift(app) unless $LOAD_PATH.include?(app)
-require 'cli'
-CLI.call 
-

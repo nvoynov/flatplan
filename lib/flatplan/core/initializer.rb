@@ -3,6 +3,7 @@
 module Flatplan
   module Core
     
+    # NOTE: NOT USED, maybe remove it 
     # A reusable, medium-agnostic orchestrator that takes raw assets and metadata,
     # processes them into standard primitives, and utilizes a provided factory
     # to compile a structured, initial domain model.
